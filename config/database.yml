@@ -15,7 +15,7 @@
 development:
   adapter: postgis
   postgis_extension: /usr/share/postgresql/9.0/contrib/postgis-1.5
-  schema_search_path: public,postgis
+#  schema_search_path: public,postgis
   encoding: unicode
   database: MapEverything_development
   pool: 5
@@ -43,7 +43,7 @@ development:
 test:
   adapter: postgis
   postgis_extension: /usr/share/postgresql/9.0/contrib/postgis-1.5
-  schema_search_path: public,postgis
+#  schema_search_path: public,postgis
   encoding: unicode
   database: MapEverything_test
   pool: 5
@@ -53,7 +53,7 @@ test:
 production:
   adapter: postgis
   postgis_extension: /usr/share/postgresql/9.0/contrib/postgis-1.5
-  schema_search_path: public,postgis
+#  schema_search_path: public,postgis
   encoding: unicode
   database: MapEverything_production
   pool: 5
