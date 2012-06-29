@@ -90,6 +90,8 @@ GEM
       activerecord (>= 3.0.3)
       arel (>= 2.0.6)
       rgeo (>= 0.3.10)
+    rgeo-geojson (0.2.3)
+      rgeo (>= 0.3.7)
     rspec (2.8.0)
       rspec-core (~> 2.8.0)
       rspec-expectations (~> 2.8.0)
@@ -129,6 +131,7 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 3.2.0)
+  rgeo-geojson
   rspec
   sass-rails (~> 3.2.3)
   therubyracer

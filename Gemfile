@@ -40,4 +40,6 @@ gem 'jquery-rails'
 gem 'i18n'
 gem 'therubyracer'
 gem 'activerecord-postgis-adapter'
+gem 'rgeo-geojson'
 gem 'rspec'
+
