@@ -3,9 +3,11 @@
 <head>
   <title>MapEverything</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "leaflet", :media => "all" %>
+  <!--[if lte IE 8]><%= stylesheet_link_tag "leaflet.ie", :media => "all" %><![endif]-->
+  <%= javascript_include_tag "leaflet" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <%= yield(:head) %>
 </head>
 <body>
 

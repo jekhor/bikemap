@@ -1,4 +1,5 @@
 MapEverything::Application.routes.draw do
+  get 'features/map' => 'features#map', :as => 'map'
   resources :features
 
   # The priority is based upon order of creation:

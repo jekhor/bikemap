@@ -43,10 +43,11 @@ class FeaturesController < ApplicationController
   # POST /features
   # POST /features.json
   def create
-    @feature = Feature.new(params[:feature])
-    lat = rand(53.0..54.0)
-    lon = rand(27.0..28.0)
-    @feature.geometry = "POINT(#{lon} #{lat})"
+    if request.format == 'application/json'
+      @feature = Feature.from_json(params)
+    else
+      @feature = Feature.new(params[:feature])
+    end
 
     respond_to do |format|
       if @feature.save
@@ -62,10 +63,22 @@ class FeaturesController < ApplicationController
   # PUT /features/1
   # PUT /features/1.json
   def update
-    @feature = Feature.find(params[:id])
+    if request.format == 'application/json'
+      @feature = Feature.find(params["properties"][:id])
+      attrs = params["properties"]
+      attrs.merge!("geometry" => params["geometry"])
+    else
+      @feature = Feature.find(params[:id])
+      attrs = params[:feature]
+    end
+    logger.debug attrs.inspect
 
     respond_to do |format|
-      if @feature.update_attributes(params[:feature])
+      coords = attrs["geometry"]["coordinates"]
+      @feature.geometry = "POINT(#{coords[0]} #{coords[1]})"
+      @feature.name = attrs["name"]
+
+      if @feature.save
         format.html { redirect_to @feature, notice: 'Feature was successfully updated.' }
         format.json { head :no_content }
       else
@@ -85,5 +98,9 @@ class FeaturesController < ApplicationController
       format.html { redirect_to features_url }
       format.json { head :no_content }
     end
+  end
+
+  def map
+    render :layout => "feature-map"
   end
 end
