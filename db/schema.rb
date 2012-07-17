@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120629161240) do
+ActiveRecord::Schema.define(:version => 20120717125845) do
+
+  create_table "comments", :force => true do |t|
+    t.integer  "feature_id", :null => false
+    t.text     "text",       :null => false
+    t.datetime "posted_on",  :null => false
+  end
+
+  add_index "comments", ["feature_id"], :name => "index_comments_on_feature_id", :unique => true
 
   create_table "features", :force => true do |t|
     t.spatial  "geometry",   :limit => {:srid=>4326, :type=>"geometry", :geographic=>true}
