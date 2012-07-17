@@ -118,8 +118,15 @@ class FeaturesController < ApplicationController
   end
 
   def map
-    @features = Feature.all(:include => :comments).sort_by {|f| -f.comments.size}
+    @features = Feature.all(:order => 'rating DESC')
     @latest_comments = Comment.find(:all, :order => 'posted_on DESC', :limit => 10)
     render :layout => "feature-map"
+  end
+
+  def popup
+    @feature = Feature.find(params[:id])
+    respond_to do |format|
+      format.html {render :layout => nil, :partial => 'popup'}
+    end
   end
 end

@@ -2,8 +2,8 @@ MapEverything::Application.routes.draw do
 
   get 'features/map' => 'features#map', :as => 'map'
   match 'features/:id/update_rating/:vote' => 'features#update_rating'
+  match 'features/:id/popup' => 'features#popup'
   resources :features do
-    resources :comments
   end
 
   # The priority is based upon order of creation:

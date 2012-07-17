@@ -4,9 +4,12 @@ L.CustomMap =  L.GeoJSON.extend({
   options: {
   },
 
-  initialize: function(geojson, options) {
+  customMap: null,
 
-    _this = this;
+  initialize: function(geojson, options) {
+    customMap = this;
+    var _this = this;
+
     pointToLayer = function(latlng) {
       var m = new L.Marker(latlng);
       m.options.draggable = true;
@@ -24,7 +27,7 @@ L.CustomMap =  L.GeoJSON.extend({
 
   featureParse: function(e) {
     e.layer.properties = e.properties;
-    this.setPopupContent(this, e.layer);
+    this.setPopupContent(e.layer);
   },
 
   onAdd: function(map) {
@@ -66,7 +69,7 @@ L.CustomMap =  L.GeoJSON.extend({
       success: function(data, textStatus, jqXHR) {
         feature.properties.id = data.properties.id;
         _this._map.addLayer(feature);
-        _this.setPopupContent(_this, feature);
+        _this.setPopupContent(feature);
         feature.openPopup();
       }
     });
@@ -98,7 +101,7 @@ L.CustomMap =  L.GeoJSON.extend({
     this.updateFeature(e.target);
   },
 
-  _popupContentCommentForm: function(_this, feature) {
+  _popupContentCommentForm: function(feature) {
     var content = '';
     content += '<form id="comment-edit-form"><input name="feature_id" type="hidden" value="${feature_id}" />';
     content += '<input name="comment" type="text" id="comment" />';
@@ -118,7 +121,7 @@ L.CustomMap =  L.GeoJSON.extend({
         data: JSON.stringify(json),
         contentType: 'application/json',
         success: function(data, textStatus, jqXHR) {
-          _this.updatePopup(_this, feature);
+          customMap.updatePopup(feature);
         }
       });
 
@@ -131,13 +134,13 @@ L.CustomMap =  L.GeoJSON.extend({
     return div;
   },
 
-  updatePopup: function(_this, feature) {
+  updatePopup: function(feature) {
     feature.closePopup();
-    _this.setPopupContent(_this, feature);
+    customMap.setPopupContent(feature);
     feature.openPopup();
   },
 
-  _popupContentShow: function(_this, feature) {
+  _popupContentShow: function(feature) {
     var div = L.DomUtil.create('div');
 
     var header = L.DomUtil.create('h3', null, div);
@@ -145,76 +148,34 @@ L.CustomMap =  L.GeoJSON.extend({
     return div;
   },
 
-  updateRating: function(_this, feature, vote) {
+  updateRating: function(feature, vote) {
     $.ajax({
       url: '/features/' + feature.properties.id + '/update_rating/' + vote,
       type: 'GET',
       dataType: 'json',
       success: function(data, textStatus, jqXHR) {
         feature.properties.rating = data;
-        _this.updatePopup(_this, feature);
+        $('#feature-popup-rating', feature._popupContent).text(data);
       }
     });
   },
 
-  setPopupContent: function(context, feature) {
+  setPopupContent: function(feature) {
     var popupDiv = L.DomUtil.create('div', 'feature-popup');
-    var header = L.DomUtil.create('div', 'feature-popup-header', popupDiv);
 
-    var mainContent = L.DomUtil.create('div', 'feature-popup-main', popupDiv);
+    $.get('/features/' + feature.properties.id + '/popup', null, function(responseText, textStatus, XMLHttpRequest) {
+      popupDiv.innerHTML = responseText;
+      feature.bindPopup(popupDiv);
+      feature._popupContent = popupDiv;
 
-    var icon = L.DomUtil.create('img', 'feature-popup-icon', header);
-    icon.src = feature.options.icon._getIconUrl('icon');
-
-    var rating = L.DomUtil.create('div', 'feature-popup-rating', header);
-    var ratingUp = L.DomUtil.create('span', 'feature-popup-rating-up-icon', rating);
-    ratingUp.textContent = 'Like ';
-    ratingUp.onclick = function(e) {
-      context.updateRating(context, feature, 1);
-    }
-
-    var ratingValue = L.DomUtil.create('span', 'feature-popup-rating-value', rating);
-    ratingValue.textContent = feature.properties.rating;
-    var ratingDown = L.DomUtil.create('span', 'feature-popup-rating-down-icon', rating);
-    ratingDown.textContent = ' Dislike';
-    ratingDown.onclick = function(e) {
-      context.updateRating(context, feature, -1);
-    }
-
-    var navigationBar = L.DomUtil.create('div', 'feature-popup-navigation', header);
-    var navList = L.DomUtil.create('ul', null, navigationBar);
-    var navitem = L.DomUtil.create('li', null, navList);
-
-    var commentDiv = L.DomUtil.create('div', 'feature-comments', popupDiv);
-    if (feature.properties.id) {
-      $.ajax({
-        url: '/features/' + feature.properties.id + '/comments',
-        type: 'GET',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: null,
-        success: function(data, textStatus, jqXHR) {
-          var i;
-          for (i = 0; i < data.length; i++) {
-            var comment = '';
-            comment += '<div class="comment">';
-            comment += '<div class="comment-date">${posted_on}</div>';
-            comment += '<div class="comment-text">${text}</div>';
-            comment += '</div>';
-
-            var tmp = $.tmpl(comment, data[i]).appendTo(commentDiv);
-          }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          commentDiv.textContent = textStatus;
-        }
+      $('#feature-popup-like', popupDiv).click(function(e) {
+        customMap.updateRating(feature, 1);
       });
-    }
 
-    popupDiv.appendChild(context._popupContentCommentForm(context, feature));
-
-
-    feature.bindPopup(popupDiv);
+      $('#feature-popup-dislike', popupDiv).click(function(e) {
+        customMap.updateRating(feature, -1);
+      });
+    }, 'html');
   },
 });
 

@@ -1,7 +1,5 @@
 class Feature < ActiveRecord::Base
 
-  has_many :comments, :order => :posted_on
-
   attr_accessible :geometry, :name
 
   set_rgeo_factory_for_column(:latlon, RGeo::Geographic.spherical_factory(:srid => 4326))
