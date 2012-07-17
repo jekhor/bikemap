@@ -1,6 +1,9 @@
 MapEverything::Application.routes.draw do
+
   get 'features/map' => 'features#map', :as => 'map'
-  resources :features
+  resources :features do
+    resources :comments
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
