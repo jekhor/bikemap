@@ -31,7 +31,7 @@ L.CustomMap =  L.GeoJSON.extend({
     this._map = map;
     map.on("click", function (e) {
       var m = new L.Marker(e.latlng);
-      m.properties = {};
+      m.properties = {rating: 0};
       m.options.draggable = true;
       m.on("dragend", this.featureDragend, this);
       this.postFeature(m);
@@ -168,7 +168,7 @@ L.CustomMap =  L.GeoJSON.extend({
 
     var rating = L.DomUtil.create('div', 'feature-popup-rating', header);
     var ratingUp = L.DomUtil.create('span', 'feature-popup-rating-up-icon', rating);
-    ratingUp.textContent = 'Up ';
+    ratingUp.textContent = 'Like ';
     ratingUp.onclick = function(e) {
       context.updateRating(context, feature, 1);
     }
@@ -176,7 +176,7 @@ L.CustomMap =  L.GeoJSON.extend({
     var ratingValue = L.DomUtil.create('span', 'feature-popup-rating-value', rating);
     ratingValue.textContent = feature.properties.rating;
     var ratingDown = L.DomUtil.create('span', 'feature-popup-rating-down-icon', rating);
-    ratingDown.textContent = ' Down';
+    ratingDown.textContent = ' Dislike';
     ratingDown.onclick = function(e) {
       context.updateRating(context, feature, -1);
     }
