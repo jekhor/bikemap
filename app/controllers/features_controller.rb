@@ -71,7 +71,6 @@ class FeaturesController < ApplicationController
       @feature = Feature.find(params[:id])
       attrs = params[:feature]
     end
-    logger.debug attrs.inspect
 
     respond_to do |format|
       coords = attrs["geometry"]["coordinates"]
@@ -84,6 +83,24 @@ class FeaturesController < ApplicationController
       else
         format.html { render action: "edit" }
         format.json { render json: @feature.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_rating
+    respond_to do |format|
+      begin
+      if params[:vote].to_i < 0
+        Feature.decrement_counter :rating, params[:id]
+      else
+        Feature.increment_counter :rating, params[:id]
+      end
+
+      feature = Feature.find(params[:id])
+
+      format.json {render json: feature.rating}
+      rescue
+        format.json {render status: :unprocessable_entity}
       end
     end
   end

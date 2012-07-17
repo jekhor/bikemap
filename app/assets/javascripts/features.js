@@ -118,9 +118,7 @@ L.CustomMap =  L.GeoJSON.extend({
         data: JSON.stringify(json),
         contentType: 'application/json',
         success: function(data, textStatus, jqXHR) {
-          feature.closePopup();
-          _this.updateComments(_this, feature);
-          feature.openPopup();
+          _this.updatePopup(_this, feature);
         }
       });
 
@@ -133,8 +131,10 @@ L.CustomMap =  L.GeoJSON.extend({
     return div;
   },
 
-  updateComments: function(_this, feature) {
+  updatePopup: function(_this, feature) {
+    feature.closePopup();
     _this.setPopupContent(_this, feature);
+    feature.openPopup();
   },
 
   _popupContentShow: function(_this, feature) {
@@ -145,6 +145,18 @@ L.CustomMap =  L.GeoJSON.extend({
     return div;
   },
 
+  updateRating: function(_this, feature, vote) {
+    $.ajax({
+      url: '/features/' + feature.properties.id + '/update_rating/' + vote,
+      type: 'GET',
+      dataType: 'json',
+      success: function(data, textStatus, jqXHR) {
+        feature.properties.rating = data;
+        _this.updatePopup(_this, feature);
+      }
+    });
+  },
+
   setPopupContent: function(context, feature) {
     var popupDiv = L.DomUtil.create('div', 'feature-popup');
     var header = L.DomUtil.create('div', 'feature-popup-header', popupDiv);
@@ -153,6 +165,21 @@ L.CustomMap =  L.GeoJSON.extend({
 
     var icon = L.DomUtil.create('img', 'feature-popup-icon', header);
     icon.src = feature.options.icon._getIconUrl('icon');
+
+    var rating = L.DomUtil.create('div', 'feature-popup-rating', header);
+    var ratingUp = L.DomUtil.create('span', 'feature-popup-rating-up-icon', rating);
+    ratingUp.textContent = 'Up ';
+    ratingUp.onclick = function(e) {
+      context.updateRating(context, feature, 1);
+    }
+
+    var ratingValue = L.DomUtil.create('span', 'feature-popup-rating-value', rating);
+    ratingValue.textContent = feature.properties.rating;
+    var ratingDown = L.DomUtil.create('span', 'feature-popup-rating-down-icon', rating);
+    ratingDown.textContent = ' Down';
+    ratingDown.onclick = function(e) {
+      context.updateRating(context, feature, -1);
+    }
 
     var navigationBar = L.DomUtil.create('div', 'feature-popup-navigation', header);
     var navList = L.DomUtil.create('ul', null, navigationBar);

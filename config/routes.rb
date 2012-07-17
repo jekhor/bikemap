@@ -1,6 +1,7 @@
 MapEverything::Application.routes.draw do
 
   get 'features/map' => 'features#map', :as => 'map'
+  match 'features/:id/update_rating/:vote' => 'features#update_rating'
   resources :features do
     resources :comments
   end
