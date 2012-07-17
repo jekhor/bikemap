@@ -6,6 +6,6 @@ class CreateComments < ActiveRecord::Migration
       t.datetime :posted_on, :null => false
     end
 
-    add_index :comments, :feature_id, :unique => true
+    add_index :comments, :feature_id, :unique => false
   end
 end

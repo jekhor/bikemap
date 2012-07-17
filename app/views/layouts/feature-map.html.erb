@@ -11,7 +11,29 @@
 </head>
 <body>
 
-<%= yield %>
+  <div id="header">
+    <%= yield(:header) %>
+    <h1> The bikerack map </h1>
+  </div>
+
+  <div id="container">
+    <div id="center" class="column">
+      <%= yield %>
+    </div>
+
+    <div id="left" class="column">
+      <%= yield(:left) %>
+    </div>
+
+    <div id="right" class="column">
+      <%= yield(:right) %>
+    </div>
+
+  </div>
+  <div id="footer">
+    <%= yield(:footer) %>
+  </div>
+
 
 </body>
 </html>

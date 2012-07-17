@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(:version => 20120717125845) do
     t.datetime "posted_on",  :null => false
   end
 
-  add_index "comments", ["feature_id"], :name => "index_comments_on_feature_id", :unique => true
+  add_index "comments", ["feature_id"], :name => "index_comments_on_feature_id"
 
   create_table "features", :force => true do |t|
     t.spatial  "geometry",   :limit => {:srid=>4326, :type=>"geometry", :geographic=>true}

@@ -1,2 +1,28 @@
 
-<div id="map" style="height: 600px" />
+<div id="map" style="height: 400px; width: 100%;" /></div>
+
+<% content_for :left do %>
+  <div class="top-features">
+    <h3>Features</h3>
+    <% @features.each do |feature| %>
+      <div class="feature">
+        <img src="/assets/marker-icon.png" />
+        <%= feature.comments.size %> Comments
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+
+<% content_for :right do %>
+  <div id="comments-latest" class="comments-latest">
+    <h3>Latest 10 comments</h3>
+    <% @latest_comments.each do |comment| %>
+      <div class="comment">
+        <div class="comment-datetime"><%= comment.posted_on %></div>
+        <div class="comment-text"><%= comment.text %></div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+

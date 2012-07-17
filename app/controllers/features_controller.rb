@@ -101,6 +101,8 @@ class FeaturesController < ApplicationController
   end
 
   def map
+    @features = Feature.all(:include => :comments).sort_by {|f| -f.comments.size}
+    @latest_comments = Comment.find(:all, :order => 'posted_on DESC', :limit => 10)
     render :layout => "feature-map"
   end
 end
