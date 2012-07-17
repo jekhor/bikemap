@@ -50,6 +50,8 @@ GEM
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
+    jquery-tmpl-rails (1.1.0)
+      rails (>= 3.1.0)
     json (1.7.3)
     leaflet-rails (0.4.0.alpha6)
     libv8 (3.3.10.4)
@@ -130,6 +132,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   i18n
   jquery-rails
+  jquery-tmpl-rails
   leaflet-rails
   pg
   rails (= 3.2.0)
