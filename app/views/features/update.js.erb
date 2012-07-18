@@ -1,1 +1,4 @@
 $('#feature-popup-contents').html("<%= escape_javascript(render :partial => 'popup')%>")
+$('#edit-link').click(function(e) {
+  $('.feature-popup').load('/features/' + '<%= @feature.id %>' + '/popup-edit-form');
+});

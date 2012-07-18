@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120717223648) do
+ActiveRecord::Schema.define(:version => 20120718091508) do
 
   create_table "comments", :force => true do |t|
     t.text     "text",      :null => false
@@ -19,11 +19,14 @@ ActiveRecord::Schema.define(:version => 20120717223648) do
   end
 
   create_table "features", :force => true do |t|
-    t.spatial  "geometry",   :limit => {:srid=>4326, :type=>"geometry", :geographic=>true}
+    t.spatial  "geometry",    :limit => {:srid=>4326, :type=>"geometry", :geographic=>true}
     t.string   "name"
-    t.datetime "created_at",                                                                               :null => false
-    t.datetime "updated_at",                                                                               :null => false
-    t.integer  "rating",                                                                    :default => 0
+    t.datetime "created_at",                                                                                :null => false
+    t.datetime "updated_at",                                                                                :null => false
+    t.integer  "rating",                                                                     :default => 0
+    t.string   "description"
+    t.integer  "capacity"
+    t.text     "comment"
   end
 
 end

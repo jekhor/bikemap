@@ -70,7 +70,6 @@ L.CustomMap =  L.GeoJSON.extend({
         feature.properties.id = data.properties.id;
         _this._map.addLayer(feature);
         _this.setPopupContent(feature, true);
-        feature.openPopup();
       }
     });
   },
@@ -179,8 +178,15 @@ L.CustomMap =  L.GeoJSON.extend({
       });
 
       $('#edit-link', popupDiv).click(function(e) {
-        $('.feature-popup').load('/features/' + feature.properties.id + '/popup-edit-form');
+        $('.feature-popup').load('/features/' + feature.properties.id + '/popup-edit-form', function (){
+        feature.closePopup();
+        feature.openPopup();
+        });
       });
+
+      if (newFeature) {
+        feature.openPopup();
+      }
     }, 'html');
   },
 });

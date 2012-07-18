@@ -79,6 +79,9 @@ class FeaturesController < ApplicationController
         @feature.geometry = "POINT(#{coords[0]} #{coords[1]})"
       end
       @feature.name = attrs["name"] if attrs["name"]
+      @feature.description = attrs["description"] if attrs["description"]
+      @feature.capacity = attrs["capacity"] if attrs["capacity"]
+      @feature.comment = attrs["comment"] if attrs["comment"]
 
       if @feature.save
         format.html { redirect_to @feature, notice: 'Feature was successfully updated.' }

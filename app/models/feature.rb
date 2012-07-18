@@ -1,6 +1,6 @@
 class Feature < ActiveRecord::Base
 
-  attr_accessible :geometry, :name
+  attr_accessible :geometry, :name, :description, :capacity, :comment
 
   set_rgeo_factory_for_column(:latlon, RGeo::Geographic.spherical_factory(:srid => 4326))
   RGeo::ActiveRecord::GeometryMixin.set_json_generator(:geojson)

@@ -1,5 +1,18 @@
+<% content_for :navigation do %>
+<% end %>
+
 <%= form_for(@feature, :remote => true) do |f| %>
   <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :capacity %>
+    <%= f.number_field :capacity, :min => 1, :size => 3 %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %>
+    <%= f.text_field :comment %>
   </div>
   <div class="submit">
     <%= f.submit 'Сохранить' %>

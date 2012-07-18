@@ -3,7 +3,7 @@ MapEverything::Application.routes.draw do
   get 'features/map' => 'features#map', :as => 'map'
   match 'features/:id/update_rating/:vote' => 'features#update_rating'
   match 'features/:id/popup' => 'features#popup'
-  match 'features/:id/popup-edit-form' => 'features#popup_edit_form'
+  match 'features/:id/popup-edit-form' => 'features#popup_edit_form', :as => 'popup_edit_form'
   resources :features do
   end
 
