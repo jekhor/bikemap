@@ -1,0 +1,10 @@
+<div id="feature-popup-header">
+  <img src="/assets/marker-icon.png"/>
+  <span id="feature-popup-like" class="feature-rating">Like</span>
+  <span id="feature-popup-rating" class="feature-rating"><%= @feature.rating -%></span>
+  <span id="feature-popup-dislike" class="feature-rating">Dislike</span>
+  <div id="feature-popup-nav"><a id="edit-link">Edit</a></div>
+</div>
+<div id="feature-popup-contents">
+  <%= yield %>
+</div>

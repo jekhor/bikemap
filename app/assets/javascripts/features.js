@@ -69,7 +69,7 @@ L.CustomMap =  L.GeoJSON.extend({
       success: function(data, textStatus, jqXHR) {
         feature.properties.id = data.properties.id;
         _this._map.addLayer(feature);
-        _this.setPopupContent(feature);
+        _this.setPopupContent(feature, true);
         feature.openPopup();
       }
     });
@@ -160,10 +160,12 @@ L.CustomMap =  L.GeoJSON.extend({
     });
   },
 
-  setPopupContent: function(feature) {
+  setPopupContent: function(feature, newFeature) {
+    newFeature = newFeature || false;
     var popupDiv = L.DomUtil.create('div', 'feature-popup');
+    var action = newFeature ? '/popup-edit-form' : '/popup';
 
-    $.get('/features/' + feature.properties.id + '/popup', null, function(responseText, textStatus, XMLHttpRequest) {
+    $.get('/features/' + feature.properties.id + action, null, function(responseText, textStatus, XMLHttpRequest) {
       popupDiv.innerHTML = responseText;
       feature.bindPopup(popupDiv);
       feature._popupContent = popupDiv;
@@ -174,6 +176,10 @@ L.CustomMap =  L.GeoJSON.extend({
 
       $('#feature-popup-dislike', popupDiv).click(function(e) {
         customMap.updateRating(feature, -1);
+      });
+
+      $('#edit-link', popupDiv).click(function(e) {
+        $('.feature-popup').load('/features/' + feature.properties.id + '/popup-edit-form');
       });
     }, 'html');
   },

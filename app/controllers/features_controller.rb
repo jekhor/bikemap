@@ -63,23 +63,27 @@ class FeaturesController < ApplicationController
   # PUT /features/1
   # PUT /features/1.json
   def update
+    attrs = {}
     if request.format == 'application/json'
       @feature = Feature.find(params["properties"][:id])
       attrs = params["properties"]
       attrs.merge!("geometry" => params["geometry"])
     else
       @feature = Feature.find(params[:id])
-      attrs = params[:feature]
+      attrs = params[:feature] if params[:feature]
     end
 
     respond_to do |format|
-      coords = attrs["geometry"]["coordinates"]
-      @feature.geometry = "POINT(#{coords[0]} #{coords[1]})"
-      @feature.name = attrs["name"]
+      if attrs["geometry"]
+        coords = attrs["geometry"]["coordinates"]
+        @feature.geometry = "POINT(#{coords[0]} #{coords[1]})"
+      end
+      @feature.name = attrs["name"] if attrs["name"]
 
       if @feature.save
         format.html { redirect_to @feature, notice: 'Feature was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @feature.errors, status: :unprocessable_entity }
@@ -126,7 +130,15 @@ class FeaturesController < ApplicationController
   def popup
     @feature = Feature.find(params[:id])
     respond_to do |format|
-      format.html {render :layout => nil, :partial => 'popup'}
+      format.html {render :layout => 'feature-popup', :partial => 'popup'}
+    end
+  end
+
+  def popup_edit_form
+    @feature = Feature.find(params[:id])
+    respond_to do |format|
+      format.html {render :layout => 'feature-popup', :partial => 'popup_edit_form'}
+      format.js {render :layout => false}
     end
   end
 end
