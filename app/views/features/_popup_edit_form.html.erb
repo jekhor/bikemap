@@ -3,15 +3,15 @@
 
 <%= form_for(@feature, :remote => true) do |f| %>
   <div class="field">
-    <%= f.label :description %>
+    <%= f.label :description, 'Место' %>
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :capacity %>
+    <%= f.label :capacity, 'Ёмкость' %>
     <%= f.number_field :capacity, :min => 1, :size => 3 %>
   </div>
   <div class="field">
-    <%= f.label :comment %>
+    <%= f.label :comment, 'Комментарий' %>
     <%= f.text_field :comment %>
   </div>
   <div class="submit">
