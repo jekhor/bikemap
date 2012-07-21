@@ -1,4 +1,5 @@
 $('#feature-popup-contents').html("<%= escape_javascript(render :partial => 'popup')%>")
+$('a[rel*="lightbox"]', $('#feature-popup-contents')).lightBox();
 $('#edit-link').click(function(e) {
   $('.feature-popup').load('/features/' + '<%= @feature.id %>' + '/popup-edit-form');
 });
