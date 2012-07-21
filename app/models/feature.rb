@@ -1,6 +1,13 @@
 class Feature < ActiveRecord::Base
 
   attr_accessible :geometry, :name, :description, :capacity, :comment
+  attr_accessible :photo
+
+  has_attached_file :photo,
+    :styles => {:large => "800x600",
+      :medium => "640x480>",
+      :thumb => "100x100"
+    }
 
   set_rgeo_factory_for_column(:latlon, RGeo::Geographic.spherical_factory(:srid => 4326))
   RGeo::ActiveRecord::GeometryMixin.set_json_generator(:geojson)

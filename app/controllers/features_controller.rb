@@ -77,13 +77,10 @@ class FeaturesController < ApplicationController
       if attrs["geometry"]
         coords = attrs["geometry"]["coordinates"]
         @feature.geometry = "POINT(#{coords[0]} #{coords[1]})"
+        attrs["geometry"] = nil
       end
-      @feature.name = attrs["name"] if attrs["name"]
-      @feature.description = attrs["description"] if attrs["description"]
-      @feature.capacity = attrs["capacity"] if attrs["capacity"]
-      @feature.comment = attrs["comment"] if attrs["comment"]
-
-      if @feature.save
+      
+      if @feature.update_attributes(attrs)
         format.html { redirect_to @feature, notice: 'Feature was successfully updated.' }
         format.json { head :no_content }
         format.js

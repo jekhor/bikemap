@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
+//= require jquery.lightbox-0.5.min
 //= require jquery-tmpl
 //= require_tree .

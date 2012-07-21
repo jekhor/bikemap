@@ -184,6 +184,8 @@ L.CustomMap =  L.GeoJSON.extend({
         });
       });
 
+      $('a[rel*="lightbox"]', popupDiv).lightBox();
+
       if (newFeature) {
         feature.openPopup();
       }

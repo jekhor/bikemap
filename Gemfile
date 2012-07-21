@@ -45,4 +45,5 @@ gem 'rgeo-geojson'
 gem 'rspec'
 gem 'leaflet-rails'
 gem 'paperclip'
+gem 'remotipart'
 
