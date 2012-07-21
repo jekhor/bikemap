@@ -87,6 +87,7 @@ class FeaturesController < ApplicationController
       else
         format.html { render action: "edit" }
         format.json { render json: @feature.errors, status: :unprocessable_entity }
+        format.js { render :action => 'popup_edit_form' }
       end
     end
   end
@@ -122,7 +123,7 @@ class FeaturesController < ApplicationController
   end
 
   def map
-    @features = Feature.all(:order => 'rating DESC')
+    @top_features = Feature.all(:order => 'rating DESC', :limit => 20)
     @latest_comments = Comment.find(:all, :order => 'posted_on DESC', :limit => 10)
     render :layout => "feature-map"
   end

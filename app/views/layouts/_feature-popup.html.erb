@@ -5,5 +5,14 @@
   <span id="feature-popup-dislike" class="feature-rating">Dislike</span>
 </div>
 <div id="feature-popup-contents">
+
+  <% unless notice.nil? %>
+    <p class="notice"><%= notice %></p>
+  <% end -%>
+
+  <% unless alert.nil? %>
+    <p class="alert"><%= alert %></p>
+  <% end -%>
+
   <%= yield %>
 </div>

@@ -9,6 +9,8 @@ class Feature < ActiveRecord::Base
       :thumb => "100x100"
     }
 
+  validates :description, :presence => true
+
   set_rgeo_factory_for_column(:latlon, RGeo::Geographic.spherical_factory(:srid => 4326))
   RGeo::ActiveRecord::GeometryMixin.set_json_generator(:geojson)
 

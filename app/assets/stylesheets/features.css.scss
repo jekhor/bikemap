@@ -6,6 +6,11 @@
   list-style-type: none;
 }
 
+.top-features {
+  height: 400px;
+  overflow: auto;
+}
+
 body {
   min-width: 550px;      /* 2x LC width + RC width */
 }

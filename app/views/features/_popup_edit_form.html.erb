@@ -1,13 +1,25 @@
 <% content_for :navigation do %>
 <% end %>
 
+<% if @feature.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@feature.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+    <ul>
+      <% @feature.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for @feature, :remote => true do |f| %>
   <div class="field">
     <%= f.label :description, 'Место' %>
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :description, 'Фотография' %>
+    <%= f.label :photo, 'Фотография' %>
     <%= f.file_field :photo %>
   </div>
   <div class="field">
