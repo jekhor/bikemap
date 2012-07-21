@@ -9,6 +9,7 @@ L.CustomMap =  L.GeoJSON.extend({
   _features: [],
   _map: null,
   _popupOpened: null,
+  _selectedFeature: null,
 
   initialize: function(geojson, options) {
     customMap = this;
@@ -63,6 +64,7 @@ L.CustomMap =  L.GeoJSON.extend({
   featureClick: function(e) {
     var f = e.target;
 
+    customMap._selectedFeature = f;
     customMap.updatePopup(f);
   },
 
@@ -161,6 +163,9 @@ L.CustomMap =  L.GeoJSON.extend({
 
       $('input.cancel', popupDiv).click(function(e) {
         customMap._map.closePopup();
+        if (newFeature) {
+          customMap._map.removeLayer(feature);
+        }
         return false;
       });
 
@@ -176,7 +181,10 @@ L.CustomMap =  L.GeoJSON.extend({
         $('.feature-popup').load('/features/' + feature.properties.id + '/edit', function (){
           feature.closePopup();
           feature.openPopup();
-
+          $('input.cancel', popupDiv).click(function(e) {
+            customMap._map.closePopup();
+            return false;
+          });
         });
       });
 
