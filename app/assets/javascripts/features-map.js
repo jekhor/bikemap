@@ -63,8 +63,6 @@ L.CustomMap =  L.GeoJSON.extend({
   featureClick: function(e) {
     var f = e.target;
 
-    f.bindPopup('<div class="popup-loading"></div>');
-    f.openPopup();
     customMap.updatePopup(f);
   },
 
@@ -122,6 +120,8 @@ L.CustomMap =  L.GeoJSON.extend({
   },
 
   updatePopup: function(feature) {
+    feature.bindPopup('<div class="popup-loading"></div>');
+    feature.openPopup();
     customMap.setPopupContent(feature);
   },
 
@@ -159,6 +159,11 @@ L.CustomMap =  L.GeoJSON.extend({
       feature.bindPopup(popupDiv);
       feature._popupContent = popupDiv;
 
+      $('input.cancel', popupDiv).click(function(e) {
+        customMap._map.closePopup();
+        return false;
+      });
+
       $('#feature-popup-like', popupDiv).click(function(e) {
         customMap.updateRating(feature, 1);
       });
@@ -172,10 +177,6 @@ L.CustomMap =  L.GeoJSON.extend({
           feature.closePopup();
           feature.openPopup();
 
-          $('input.cancel', popupDiv).click(function(e) {
-            customMap._map.closePopup();
-            return false;
-          });
         });
       });
 
@@ -194,7 +195,7 @@ L.CustomMap =  L.GeoJSON.extend({
     feature = customMap._features[featureId];
 
     customMap._map.setView(feature.getLatLng(), zoomLevel);
-    feature.openPopup();
+    customMap.updatePopup(feature);
   },
 });
 
