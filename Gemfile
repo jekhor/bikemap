@@ -44,4 +44,5 @@ gem 'activerecord-postgis-adapter'
 gem 'rgeo-geojson'
 gem 'rspec'
 gem 'leaflet-rails'
+gem 'paperclip'
 
