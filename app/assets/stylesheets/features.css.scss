@@ -11,6 +11,13 @@
   overflow: auto;
 }
 
+div.popup-loading {
+  background-image: url("ajax-loader.gif");
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100px;
+}
+
 body {
   min-width: 550px;      /* 2x LC width + RC width */
 }

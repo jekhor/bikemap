@@ -1,5 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div id="feature-popup-nav"><a id="edit-link">Edit</a></div>
+
+<div>
+  <strong>Место:</strong><br/>
+  <%= @feature.description %>
+</div>
+<div>
+  <strong>Фото:</strong><br/>
+  <%= link_to image_tag(@feature.photo.url(:thumb)), @feature.photo.url(:large), :rel => "lightbox", :title => @feature.description  unless @feature.photo_file_name.nil? %>
+</div>
+<div>
+  <strong>Ёмкость:</strong>
+  <%= @feature.capacity %>
+</div>
+<div>
+  <strong>Комментарий:</strong><br/>
+  <%= @feature.comment %>
+</div>
 
 
-<%= link_to 'Edit', edit_feature_path(@feature) %> |
-<%= link_to 'Back', features_path %>
+

@@ -8,6 +8,7 @@ L.CustomMap =  L.GeoJSON.extend({
 
   _features: [],
   _map: null,
+  _popupOpened: null,
 
   initialize: function(geojson, options) {
     customMap = this;
@@ -15,8 +16,7 @@ L.CustomMap =  L.GeoJSON.extend({
 
     pointToLayer = function(latlng) {
       var m = new L.Marker(latlng);
-      m.options.draggable = true;
-      m.on("dragend", _this.featureDragend, _this);
+      customMap._initMarker(m);
       return m;
     };
 
@@ -31,18 +31,11 @@ L.CustomMap =  L.GeoJSON.extend({
   featureParse: function(e) {
     e.layer.properties = e.properties;
     customMap._features[e.properties.id] = e.layer;
-    this.setPopupContent(e.layer);
   },
 
   onAdd: function(map) {
     customMap._map = map;
-    map.on("click", function (e) {
-      var m = new L.Marker(e.latlng);
-      m.properties = {rating: 0};
-      m.options.draggable = true;
-      m.on("dragend", this.featureDragend, this);
-      this.postFeature(m);
-    }, this);
+    map.on("click", customMap.onClick);
 
     L.GeoJSON.prototype.onAdd.call(this, map);
   },
@@ -50,6 +43,29 @@ L.CustomMap =  L.GeoJSON.extend({
 
   onRemove: function(map) {
     L.GeoJSON.prototype.onRemove.call(this, map);
+  },
+
+  _initMarker: function(m) {
+      m.options.draggable = true;
+      m.on("dragend", customMap.featureDragend, customMap);
+      m.on("click", customMap.featureClick, customMap); 
+  },
+
+  onClick: function(e) {
+    var m = new L.Marker(e.latlng);
+    m.properties = {rating: 0};
+    customMap._initMarker(m);
+    customMap.setPopupContent(m, true);
+    customMap._map.addLayer(m);
+//    this.postFeature(m);
+  },
+
+  featureClick: function(e) {
+    var f = e.target;
+
+    f.bindPopup('<div class="popup-loading"></div>');
+    f.openPopup();
+    customMap.updatePopup(f);
   },
 
   postFeature: function(feature) {
@@ -74,17 +90,17 @@ L.CustomMap =  L.GeoJSON.extend({
         feature.properties.id = data.properties.id;
         customMap._features[feature.properties.id] = feature;
         _this._map.addLayer(feature);
-        _this.setPopupContent(feature, true);
+//        _this.setPopupContent(feature, true);
       }
     });
   },
 
 
-  updateFeature: function(feature) {
+  updateFeatureGeometry: function(feature) {
     latlng = feature.getLatLng();
     json_feature = {
       'type': 'Feature',
-      'properties': feature.properties,
+      'properties': {'id': feature.properties['id']},
       'geometry': {
         'type': 'Point',
         'coordinates': [latlng.lng, latlng.lat]
@@ -102,46 +118,11 @@ L.CustomMap =  L.GeoJSON.extend({
 
 
   featureDragend: function(e) {
-    this.updateFeature(e.target);
-  },
-
-  _popupContentCommentForm: function(feature) {
-    var content = '';
-    content += '<form id="comment-edit-form"><input name="feature_id" type="hidden" value="${feature_id}" />';
-    content += '<input name="comment" type="text" id="comment" />';
-    content += '<input type="submit" value="Post" />';
-    content += '</form>';
-
-    var form = $.tmpl(content, {feature_id: feature.properties.id})[0];
-    form.onsubmit = function(e) {
-      json = {
-        feature_id: this.feature_id.value,
-        text: this.comment.value
-      }
-      $.ajax({
-        url: '/features/' + this.feature_id.value + '/comments',
-        type: 'POST',
-        dataType: 'json',
-        data: JSON.stringify(json),
-        contentType: 'application/json',
-        success: function(data, textStatus, jqXHR) {
-          customMap.updatePopup(feature);
-        }
-      });
-
-      return false;
-    }
-
-    var div = L.DomUtil.create('div', 'comment-edit');
-    div.appendChild(form);
-
-    return div;
+    this.updateFeatureGeometry(e.target);
   },
 
   updatePopup: function(feature) {
-    feature.closePopup();
     customMap.setPopupContent(feature);
-    feature.openPopup();
   },
 
   _popupContentShow: function(feature) {
@@ -167,9 +148,13 @@ L.CustomMap =  L.GeoJSON.extend({
   setPopupContent: function(feature, newFeature) {
     newFeature = newFeature || false;
     var popupDiv = L.DomUtil.create('div', 'feature-popup');
-    var action = newFeature ? '/popup-edit-form' : '/popup';
+    var action = '';
+    var ll = feature.getLatLng();
+    var geometry = 'POINT(' + ll.lng + ' ' + ll.lat + ')';
+    
+    action += newFeature ? 'new?geometry=' + geometry : feature.properties.id;
 
-    $.get('/features/' + feature.properties.id + action, null, function(responseText, textStatus, XMLHttpRequest) {
+    $.get('/features/' + action, null, function(responseText, textStatus, XMLHttpRequest) {
       popupDiv.innerHTML = responseText;
       feature.bindPopup(popupDiv);
       feature._popupContent = popupDiv;
@@ -183,17 +168,24 @@ L.CustomMap =  L.GeoJSON.extend({
       });
 
       $('#edit-link', popupDiv).click(function(e) {
-        $('.feature-popup').load('/features/' + feature.properties.id + '/popup-edit-form', function (){
+        $('.feature-popup').load('/features/' + feature.properties.id + '/edit', function (){
           feature.closePopup();
           feature.openPopup();
+
+          $('input.cancel', popupDiv).click(function(e) {
+            customMap._map.closePopup();
+            return false;
+          });
         });
       });
 
+
       $('a[rel*="lightbox"]', popupDiv).lightBox();
 
-      if (newFeature) {
+//      if (newFeature) {
+        feature.closePopup();
         feature.openPopup();
-      }
+//      }
     }, 'html');
   },
 
@@ -206,11 +198,16 @@ L.CustomMap =  L.GeoJSON.extend({
   },
 });
 
+var theMap = null;
+var theCustomMap = null;
+
 init_map = function() {
   map = new L.Map('map');
+  theMap = map;
   osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: 'OSM'});
 
   featureLayer = new L.CustomMap();
+  theCustomMap = featureLayer;
 
   L.Icon.Default.imagePath = '/assets';
 

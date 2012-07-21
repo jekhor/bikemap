@@ -1,0 +1,6 @@
+$('#feature-popup-contents').html("<%= escape_javascript(render :file => 'features/edit', :formats => ['html'])%>")
+$('input.cancel').click(function(e) {
+  theMap.closePopup();
+  return false;
+});
+

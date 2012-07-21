@@ -19,7 +19,7 @@ class FeaturesController < ApplicationController
     @feature = Feature.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {render :layout => 'feature-popup'}
       format.json { render json: @feature }
     end
   end
@@ -28,9 +28,10 @@ class FeaturesController < ApplicationController
   # GET /features/new.json
   def new
     @feature = Feature.new
+    @feature.geometry = params[:geometry]
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html {render :layout => 'feature-popup'}
       format.json { render json: @feature }
     end
   end
@@ -38,6 +39,10 @@ class FeaturesController < ApplicationController
   # GET /features/1/edit
   def edit
     @feature = Feature.find(params[:id])
+    respond_to do |format|
+      format.html {render :layout => 'feature-popup'}
+      format.js
+    end
   end
 
   # POST /features
@@ -53,9 +58,11 @@ class FeaturesController < ApplicationController
       if @feature.save
         format.html { redirect_to @feature, notice: 'Feature was successfully created.' }
         format.json { render json: @feature, status: :created, location: @feature }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @feature.errors, status: :unprocessable_entity }
+        format.js { render action: 'new' }
       end
     end
   end
@@ -74,10 +81,10 @@ class FeaturesController < ApplicationController
     end
 
     respond_to do |format|
-      if attrs["geometry"]
+      logger.debug "attrs:" + attrs.inspect
+      if !attrs["geometry"].nil? and !attrs["geometry"]["coordinates"].nil?
         coords = attrs["geometry"]["coordinates"]
-        @feature.geometry = "POINT(#{coords[0]} #{coords[1]})"
-        attrs["geometry"] = nil
+        attrs['geometry'] = "POINT(#{coords[0]} #{coords[1]})"
       end
       
       if @feature.update_attributes(attrs)
@@ -85,9 +92,9 @@ class FeaturesController < ApplicationController
         format.json { head :no_content }
         format.js
       else
-        format.html { render action: "edit" }
+        format.html { render action: "edit", layout: 'feature-popup' }
         format.json { render json: @feature.errors, status: :unprocessable_entity }
-        format.js { render :action => 'popup_edit_form' }
+        format.js { render action: 'edit' }
       end
     end
   end
@@ -128,18 +135,4 @@ class FeaturesController < ApplicationController
     render :layout => "feature-map"
   end
 
-  def popup
-    @feature = Feature.find(params[:id])
-    respond_to do |format|
-      format.html {render :layout => 'feature-popup', :partial => 'popup'}
-    end
-  end
-
-  def popup_edit_form
-    @feature = Feature.find(params[:id])
-    respond_to do |format|
-      format.html {render :layout => 'feature-popup', :partial => 'popup_edit_form'}
-      format.js {render :layout => false}
-    end
-  end
 end

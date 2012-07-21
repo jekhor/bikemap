@@ -10,6 +10,7 @@ class Feature < ActiveRecord::Base
     }
 
   validates :description, :presence => true
+  validates :geometry, :presence => true
 
   set_rgeo_factory_for_column(:latlon, RGeo::Geographic.spherical_factory(:srid => 4326))
   RGeo::ActiveRecord::GeometryMixin.set_json_generator(:geojson)
