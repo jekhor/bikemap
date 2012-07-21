@@ -6,7 +6,8 @@
   <%= stylesheet_link_tag    "leaflet", :media => "all" %>
   <!--[if lte IE 8]><%= stylesheet_link_tag "leaflet.ie", :media => "all" %><![endif]-->
   <%= javascript_include_tag "leaflet" %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application", controller_name %>
+  <%= javascript_include_tag "features-map" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
