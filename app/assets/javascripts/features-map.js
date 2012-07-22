@@ -220,8 +220,10 @@ init_map = function() {
 
   L.Icon.Default.imagePath = '/assets';
 
-  minsk = new L.LatLng(53.901, 27.5545);
-  map.setView(minsk, 12);
+//  minsk = new L.LatLng(53.901, 27.5545);
+//  map.setView(minsk, 12);
+  hrodna = new L.LatLng(53.6751, 23.8275);
+  map.setView(hrodna, 13);
   map.addLayer(osm);
   map.addLayer(featureLayer);
 
