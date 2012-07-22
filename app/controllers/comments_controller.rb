@@ -1,6 +1,9 @@
 # encoding: utf-8
 
 class CommentsController < ApplicationController
+
+  before_filter :authenticate_user!, :except => [:index, :show]
+
   def index
     @comments = Comment.all
     respond_to do |format|
@@ -27,6 +30,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(params[:comment])
     @comment.posted_on = DateTime.now;
+    @comment.user = current_user
 
     if @comment.save
       flash[:notice] = "Комментарий отправлен."

@@ -1,9 +1,11 @@
 <% if @comment.errors.any? %>
   $("#comment-notice").html('<div class="alert"><%= escape_javascript(alert) %></div>');
-
+  <% flash.delete(:alert) %>
 <% else %>
   $("#comment-alert").hide(300);
   $(":input:not(input[type=submit])").val("");
-  $('.comments-list').prepend("<%= escape_javascript(render 'comment')%>")
+  $('.comments-list').prepend("<%= escape_javascript(render 'comment', { :comment => @comment })%>")
     $("#comment-notice").html('<div class="notice"><%= escape_javascript(notice) %></div>');
+    <% flash.delete(:notice) %>
 <% end %>
+

@@ -26,15 +26,12 @@
   <div id="comments-latest" class="comments-latest">
     <h3>Комментарии</h3>
     <div class="comment-post-container">
-      <%= link_to 'Написать', new_comment_path, :remote => true %>
+      <%= link_to 'Комментировать', new_comment_path, :remote => true if user_signed_in? %>
     </div>
     <div id="comment-notice"></div>
     <ul class="comments-list">
     <% @latest_comments.each do |comment| %>
-      <li class="comment">
-        <p class="comment-author-datetime"><%= comment.posted_on %></p>
-        <p class="comment-text"><%= comment.text %></p>
-      </li>
+      <%= render :file => 'comments/_comment', :locals => { :comment => comment } %>
     <% end %>
   </div>
 <% end %>
