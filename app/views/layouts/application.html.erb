@@ -2,14 +2,41 @@
 <html>
 <head>
   <title>MapEverything</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application", controller_name %>
+  <%= stylesheet_link_tag  "application", :media => "all" %>
+  <%= stylesheet_link_tag  controller_name, :media => "all" unless MapEverything::Application.assets.find_asset("#{controller_name}.css").nil? %>
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <%= stylesheet_link_tag    "blueprint/screen", :media => "screen" %>
+  <%= stylesheet_link_tag    "blueprint/print", :media => "print" %>
+  <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
+
+  <%= javascript_include_tag "application", controller_name unless MapEverything::Application.assets.find_asset("#{controller_name}.js").nil?  %>
   <%= csrf_meta_tags %>
   <%= yield(:head) %>
 </head>
 <body>
 
-<%= yield %>
+  <div id="header">
+    <nav>
+      <ul>
+        <li><%= link_to "Map", map_path %></li>
+        <% if user_signed_in? -%>
+          <li><%= link_to "Sign out (#{current_user.email})", destroy_user_session_path, :method => :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign in", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+
+    <% unless notice.nil? %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% unless alert.nil? %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+
+  <%= yield %>
 
 </body>
 </html>

@@ -1,9 +1,13 @@
 MapEverything::Application.routes.draw do
 
+  devise_for :users
+
   get 'features/map' => 'features#map', :as => 'map'
   match 'features/:id/update_rating/:vote' => 'features#update_rating'
   resources :features do
   end
+
+  root :to => "features#map"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
