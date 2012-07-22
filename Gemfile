@@ -47,4 +47,5 @@ gem 'leaflet-rails'
 gem 'paperclip'
 gem 'remotipart'
 gem 'devise'
+gem 'omniauth-facebook'
 

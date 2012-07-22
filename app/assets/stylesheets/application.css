@@ -10,7 +10,6 @@
  *
  *= require_self
  *= require jquery.lightbox-0.5
- *= require blueprint/screen.css
 */
 
 /* Navigation */
@@ -49,3 +48,29 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
+.notice, .alert {
+  text-align: center;
+}
+.notice {
+  background:#bff6bf;
+  color:#514721;
+  border-color:#99d399;
+}
+
+ul.comments-list {
+  list-style-type: none;
+}
+
+.comment-author-datetime {
+  color: 818181;
+  font-size: 0.8em;
+}
+
+li.comment {
+  background-color: #eeeeee;
+  margin-bottom: 10px;
+}
+
+p.comment-text {
+  font-size: 1.2em;
+}

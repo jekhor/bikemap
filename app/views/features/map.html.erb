@@ -1,3 +1,9 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag    "leaflet", :media => "all" %>
+  <!--[if lte IE 8]><%= stylesheet_link_tag "leaflet.ie", :media => "all" %><![endif]-->
+  <%= javascript_include_tag "leaflet" %>
+  <%= javascript_include_tag "features-map" %>
+<% end %>
 
 <div id="map" style="height: 400px; width: 100%;" /></div>
 
@@ -18,12 +24,16 @@
 
 <% content_for :right do %>
   <div id="comments-latest" class="comments-latest">
-    <h3>Latest 10 comments</h3>
+    <h3>Комментарии</h3>
+    <div class="comment-post-container">
+      <%= link_to 'Написать', new_comment_path, :remote => true %>
+    </div>
+    <ul class="comments-list">
     <% @latest_comments.each do |comment| %>
-      <div class="comment">
-        <div class="comment-datetime"><%= comment.posted_on %></div>
-        <div class="comment-text"><%= comment.text %></div>
-      </div>
+      <li class="comment">
+        <p class="comment-author-datetime"><%= comment.posted_on %></p>
+        <p class="comment-text"><%= comment.text %></p>
+      </li>
     <% end %>
   </div>
 <% end %>

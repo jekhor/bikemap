@@ -2,8 +2,6 @@
 <html>
 <head>
   <title>MapEverything</title>
-  <%= stylesheet_link_tag  "application", :media => "all" %>
-  <%= stylesheet_link_tag  controller_name, :media => "all" unless MapEverything::Application.assets.find_asset("#{controller_name}.css").nil? %>
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -11,32 +9,60 @@
   <%= stylesheet_link_tag    "blueprint/print", :media => "print" %>
   <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
 
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag  controller_name, :media => "all" unless MapEverything::Application.assets.find_asset("#{controller_name}.css").nil? %>
+
   <%= javascript_include_tag "application", controller_name unless MapEverything::Application.assets.find_asset("#{controller_name}.js").nil?  %>
   <%= csrf_meta_tags %>
-  <%= yield(:head) %>
+
+  <%= yield :head %>
 </head>
 <body>
 
-  <div id="header">
+  <div class="container">
+  <div id="header" class="span-24 last">
     <nav>
       <ul>
         <li><%= link_to "Map", map_path %></li>
         <% if user_signed_in? -%>
-          <li><%= link_to "Sign out (#{current_user.email})", destroy_user_session_path, :method => :delete %></li>
+          <li><%= link_to "Sign out (#{current_user.name})", destroy_user_session_path, :method => :delete %></li>
         <% else %>
+          <li><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></li>
           <li><%= link_to "Sign in", new_user_session_path %></li>
         <% end %>
       </ul>
     </nav>
 
-    <% unless notice.nil? %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-    <% unless alert.nil? %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
+    <h1> The bikerack map </h1>
+    <%= yield(:header) %>
+  </div>
 
-  <%= yield %>
+    <div id="left" class="span-6">
+      <%= yield(:left) %>
+    </div>
+
+    <div class="span-18 last">
+      <div id="center">
+        <% unless notice.nil? %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+        <% unless alert.nil? %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
+
+        <%= yield %>
+      </div>
+
+      <div id="bottom">
+        <%= yield(:right) %>
+      </div>
+    </div>
+
+  <div id="footer" class="span-24 last">
+    <%= yield(:footer) %>
+  </div>
+  </div>
+
 
 </body>
 </html>

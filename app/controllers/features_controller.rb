@@ -132,7 +132,7 @@ class FeaturesController < ApplicationController
   def map
     @top_features = Feature.all(:order => 'rating DESC', :limit => 20)
     @latest_comments = Comment.find(:all, :order => 'posted_on DESC', :limit => 10)
-    render :layout => "feature-map"
+    render
   end
 
 end
