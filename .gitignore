@@ -15,5 +15,6 @@
 /tmp
 
 /Gemfile.lock
+/public/system/*
 
 *.swp
