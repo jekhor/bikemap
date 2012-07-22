@@ -1,32 +1,41 @@
+# encoding: utf-8
+
 class CommentsController < ApplicationController
   def index
-    @feature = Feature.find(params[:feature_id])
-
+    @comments = Comment.all
     respond_to do |format|
-      format.json {render json: @feature.comments}
+      format.json {render json: @comments}
       format.html
     end
   end
 
+  def new
+    @comment = Comment.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def show
-    @feature = Feature.find(params[:feature_id])
-    @comment = @feature.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
     respond_to do |format|
       format.json {render json: @comment}
     end
   end
 
   def create
-    @feature = Feature.find(params[:feature_id])
-    @comment = @feature.comments.new(params[:comment])
+    @comment = Comment.new(params[:comment])
     @comment.posted_on = DateTime.now;
 
+    if @comment.save
+      flash[:notice] = "Комментарий отправлен."
+    else
+      flash[:alert] = "Упс! С комментарием что-то не так..."
+    end
+
     respond_to do |format|
-      if @comment.save
-        format.json { render json: @comment, status: :created, location: feature_comment_url(:id => @comment.id) }
-      else
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+      format.js
     end
   end
 

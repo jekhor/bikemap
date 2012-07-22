@@ -1,0 +1,13 @@
+<%= form_for @comment, :remote => true do |f| %>
+  <fieldset>
+    <legend>Отправка комментария</legend>
+  <p>
+    <%= f.label :text %><br/>
+    <%= f.text_area :text, :rows => 2 %>
+  </p>
+
+  <p>
+    <%= f.submit 'Отправить' %>
+  </p>
+</fieldset>
+<% end %>

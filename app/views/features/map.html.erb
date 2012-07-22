@@ -22,12 +22,13 @@
 <% end %>
 
 
-<% content_for :right do %>
+<% content_for :bottom do %>
   <div id="comments-latest" class="comments-latest">
     <h3>Комментарии</h3>
     <div class="comment-post-container">
       <%= link_to 'Написать', new_comment_path, :remote => true %>
     </div>
+    <div id="comment-notice"></div>
     <ul class="comments-list">
     <% @latest_comments.each do |comment| %>
       <li class="comment">

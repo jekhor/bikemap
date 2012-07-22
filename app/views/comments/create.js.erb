@@ -1,0 +1,9 @@
+<% if @comment.errors.any? %>
+  $("#comment-notice").html('<div class="alert"><%= escape_javascript(alert) %></div>');
+
+<% else %>
+  $("#comment-alert").hide(300);
+  $(":input:not(input[type=submit])").val("");
+  $('.comments-list').prepend("<%= escape_javascript(render 'comment')%>")
+    $("#comment-notice").html('<div class="notice"><%= escape_javascript(notice) %></div>');
+<% end %>

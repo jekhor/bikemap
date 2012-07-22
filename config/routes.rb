@@ -7,6 +7,8 @@ MapEverything::Application.routes.draw do
   resources :features do
   end
 
+  resources :comments
+
   root :to => "features#map"
 
   # The priority is based upon order of creation:
