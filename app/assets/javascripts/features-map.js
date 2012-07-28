@@ -37,6 +37,7 @@ L.CustomMap =  L.GeoJSON.extend({
   onAdd: function(map) {
     customMap._map = map;
     map.on("click", customMap.onClick);
+    map.on("popupclose", customMap.onPopupClose);
 
     L.GeoJSON.prototype.onAdd.call(this, map);
   },
@@ -52,10 +53,19 @@ L.CustomMap =  L.GeoJSON.extend({
       m.on("click", customMap.featureClick, customMap); 
   },
 
+  onPopupClose: function(e) {
+    if (customMap._selectedFeature &&
+        customMap._selectedFeature.properties.id == null) {
+          customMap._map.removeLayer(customMap._selectedFeature);
+          customMap._selectedFeature = null;
+        }
+  },
+
   onClick: function(e) {
     var m = new L.Marker(e.latlng);
     m.properties = {rating: 0};
     customMap._initMarker(m);
+    customMap._selectedFeature = m;
     customMap.setPopupContent(m, true);
     customMap._map.addLayer(m);
 //    this.postFeature(m);
@@ -204,6 +214,11 @@ L.CustomMap =  L.GeoJSON.extend({
 
     customMap._map.setView(feature.getLatLng(), zoomLevel);
     customMap.updatePopup(feature);
+  },
+
+  removeSelectedFeature: function() {
+    customMap._map.removeLayer(customMap._selectedFeature);
+    customMap._selectedFeature = null;
   },
 });
 
