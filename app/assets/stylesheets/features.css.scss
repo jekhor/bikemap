@@ -22,10 +22,25 @@ div.popup-loading {
   height: 100px;
 }
 
-body {
-  min-width: 550px;      /* 2x LC width + RC width */
+.loading {
+  background-image: url("ajax-loader.gif");
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100px;
+  width: 100px;
+  display: none;
+//  float: right;
 }
 
+.leaflet-div-icon {
+  width: 40px;
+  height: 40px;
+}
+
+//body {
+//  min-width: 550px;      /* 2x LC width + RC width */
+//}
+//
 //#container {
 //  padding-left: 200px;   /* LC width */
 //  padding-right: 300px;  /* RC width */

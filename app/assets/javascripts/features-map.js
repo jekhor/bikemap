@@ -15,8 +15,20 @@ L.CustomMap =  L.GeoJSON.extend({
     customMap = this;
     var _this = this;
 
-    pointToLayer = function(latlng) {
-      var m = new L.Marker(latlng);
+    pointToLayer = function(geojson) {
+      var coords = geojson.geometry.coordinates;
+      var latlng = new L.LatLng(coords[1], coords[0]);
+   
+      var icon = new L.DivIcon({
+        iconSize: new L.Point(40, 40),
+          html: '<strong>' + geojson.properties.rating + '</strong>'
+      });
+
+      var m = new L.Marker(latlng, {
+        icon: icon
+      });
+      m.properties = geojson.properties;
+      customMap._features[m.properties.id] = m;
       customMap._initMarker(m);
       return m;
     };
@@ -25,13 +37,6 @@ L.CustomMap =  L.GeoJSON.extend({
     options = L.Util.setOptions(this, options);
     L.GeoJSON.prototype.initialize.call(this, geojson, options);
 
-    this.on("featureparse", this.featureParse, this);
-  },
-
-
-  featureParse: function(e) {
-    e.layer.properties = e.properties;
-    customMap._features[e.properties.id] = e.layer;
   },
 
   onAdd: function(map) {
@@ -243,7 +248,7 @@ init_map = function() {
   map.addLayer(featureLayer);
 
   $.getJSON('/features.json', function(data) {
-    featureLayer.addGeoJSON(data);
+    featureLayer.addData(data);
   });
 
   $('a.feature-top-item').click(function() {
