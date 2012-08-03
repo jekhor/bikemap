@@ -1,4 +1,6 @@
-<div id="feature-popup-nav"><a id="edit-link">Edit</a></div>
+<% if !current_user.nil? and current_user.admin? %>
+  <div id="feature-popup-nav"><a id="edit-link">Edit</a></div>
+<% end %>
 
 <div>
   <strong><%= @feature.existing? ? 'Существующая' : 'Желаемая' %></strong>

@@ -55,9 +55,12 @@ L.CustomMap =  L.GeoJSON.extend({
   },
 
   _initMarker: function(m) {
+    if ($('#current-user').data('admin')) {
       m.options.draggable = true;
       m.on("dragend", customMap.featureDragend, customMap);
-      m.on("click", customMap.featureClick, customMap); 
+    }
+
+    m.on("click", customMap.featureClick, customMap); 
   },
 
   onPopupClose: function(e) {

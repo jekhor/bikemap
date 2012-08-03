@@ -5,6 +5,7 @@
   <%= javascript_include_tag "features-map" %>
 <% end %>
 
+<%= tag 'div', id: 'current-user', data: {uid: current_user.id, admin: current_user.admin?, name: current_user.name} unless current_user.nil? %>
 <div id="map" style="height: 400px; width: 100%;" /></div>
 
 <% content_for :left do %>
