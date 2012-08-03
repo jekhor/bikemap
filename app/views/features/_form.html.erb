@@ -13,6 +13,11 @@
 <%= form_for @feature, :remote => true do |f| %>
   <%= f.hidden_field :geometry unless @feature.geometry.nil? %>
   <div class="field">
+    <%= f.label :existing, 'Тип' %>
+    <%= f.radio_button :existing, false %><%= f.label :existing, 'Желаемая', :for => false %>
+    <%= f.radio_button :existing, true %><%= f.label :existing, 'Существующая', :for => true %>
+  </div>
+  <div class="field">
     <%= f.label :description, 'Место' %>
     <%= f.text_field :description %>
   </div>

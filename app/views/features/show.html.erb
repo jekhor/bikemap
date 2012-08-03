@@ -1,6 +1,8 @@
 <div id="feature-popup-nav"><a id="edit-link">Edit</a></div>
 
 <div>
+  <strong><%= @feature.existing? ? 'Существующая' : 'Желаемая' %></strong>
+<div>
   <strong>Место:</strong><br/>
   <%= @feature.description %>
 </div>

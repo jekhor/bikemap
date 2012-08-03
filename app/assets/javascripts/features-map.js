@@ -18,10 +18,12 @@ L.CustomMap =  L.GeoJSON.extend({
     pointToLayer = function(geojson) {
       var coords = geojson.geometry.coordinates;
       var latlng = new L.LatLng(coords[1], coords[0]);
+      var iconClass = geojson.properties.existing ? 'leaflet-div-icon-existing' : 'leaflet-div-icon-desired';
    
       var icon = new L.DivIcon({
-        iconSize: new L.Point(40, 40),
-          html: '<strong>' + geojson.properties.rating + '</strong>'
+        iconSize: new L.Point(24, 24),
+        html: '<strong>' + geojson.properties.rating + '</strong>',
+        className: iconClass
       });
 
       var m = new L.Marker(latlng, {

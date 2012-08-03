@@ -10,12 +10,14 @@
   <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= stylesheet_link_tag  controller_name, :media => "all" unless MapEverything::Application.assets.find_asset("#{controller_name}.css").nil? %>
-
-  <%= javascript_include_tag "application", controller_name unless MapEverything::Application.assets.find_asset("#{controller_name}.js").nil?  %>
   <%= csrf_meta_tags %>
 
+  <%= javascript_include_tag "application", controller_name unless MapEverything::Application.assets.find_asset("#{controller_name}.js").nil?  %>
+
   <%= yield :head %>
+
+  <%= stylesheet_link_tag  controller_name, :media => "all" unless MapEverything::Application.assets.find_asset("#{controller_name}.css").nil? %>
+
 </head>
 <body>
 

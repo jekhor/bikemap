@@ -1,7 +1,7 @@
 class Feature < ActiveRecord::Base
 
   attr_accessible :geometry, :name, :description, :capacity, :comment
-  attr_accessible :photo
+  attr_accessible :photo, :existing
 
   has_attached_file :photo,
     :styles => {:large => "800x600",
