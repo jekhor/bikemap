@@ -19,6 +19,9 @@ L.CustomMap =  L.GeoJSON.extend({
       var coords = geojson.geometry.coordinates;
       var latlng = new L.LatLng(coords[1], coords[0]);
       var iconClass = geojson.properties.existing ? 'leaflet-div-icon-existing' : 'leaflet-div-icon-desired';
+      if (!geojson.properties.approved) {
+        iconClass += ' feature-notapproved';
+      }
    
       var icon = new L.DivIcon({
         iconSize: new L.Point(24, 24),

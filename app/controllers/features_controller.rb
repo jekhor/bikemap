@@ -132,6 +132,7 @@ class FeaturesController < ApplicationController
 
   def map
     @top_features = Feature.all(:order => 'rating DESC', :limit => 20)
+    @not_approved_features = Feature.where(:approved => false)
     @latest_comments = Comment.find(:all, :order => 'posted_on DESC', :limit => 10)
     render
   end

@@ -9,6 +9,20 @@
 <div id="map" style="height: 400px; width: 100%;" /></div>
 
 <% content_for :left do %>
+  <% if current_user.admin? %>
+  <div class="top-features">
+    <h3>На модерацию</h3>
+    <% @not_approved_features.each do |feature| %>
+      <div class="feature">
+        <a href="#" class="feature-top-item" id="feature_top_item_<%= feature.id -%>">
+        <img src="/assets/marker-icon.png" />
+        <%= feature.description %>
+      </a>
+      </div>
+    <% end %>
+  </div>
+
+  <% end %>
   <div class="top-features">
     <h3>Топ-20 велопарковок</h3>
     <% @top_features.each do |feature| %>

@@ -50,6 +50,11 @@ div.popup-loading {
   border: none;
 }
 
+.feature-notapproved {
+  opacity: 0.4;
+  filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
 .leaflet-div-icon-desired strong {
   position: relative;
   top: 4px;
