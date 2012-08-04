@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Имя: </strong>
+  <%= @user.name %>
+</p>
+<p>
+  <strong>E-mail: </strong>
+  <%= @user.email %>
+</p>
+<p>
+  <strong>Провайдер: </strong>
+  <%= @user.provider %>
+</p>
+<p>
+  <strong>Администратор: </strong>
+  <%= @user.admin? ? 'да' : 'нет' %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
