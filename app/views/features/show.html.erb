@@ -1,4 +1,4 @@
-<% if !current_user.nil? and current_user.admin? %>
+<% if have_edit_permissions?(@feature) %>
   <div id="feature-popup-nav"><a id="edit-link">Edit</a></div>
 <% end %>
 

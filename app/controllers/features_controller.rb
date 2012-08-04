@@ -1,5 +1,15 @@
 class FeaturesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show, :map]
+  helper_method :have_edit_permissions?
+
+  private
+  def have_edit_permissions?(feature)
+    return false if current_user.nil?
+    current_user.admin? or feature.user == current_user
+  end
+
+  public
+
   # GET /features
   # GET /features.json
   def index
@@ -30,6 +40,7 @@ class FeaturesController < ApplicationController
   def new
     @feature = Feature.new
     @feature.geometry = params[:geometry]
+    @feature.user = current_user
 
     respond_to do |format|
       format.html {render :layout => 'feature-popup'}
@@ -54,6 +65,8 @@ class FeaturesController < ApplicationController
     else
       @feature = Feature.new(params[:feature])
     end
+
+    @feature.user = current_user
 
     respond_to do |format|
       if @feature.save
@@ -88,7 +101,7 @@ class FeaturesController < ApplicationController
         attrs['geometry'] = "POINT(#{coords[0]} #{coords[1]})"
       end
       
-      if @feature.update_attributes(attrs)
+      if have_edit_permissions?(@feature) and @feature.update_attributes(attrs)
         format.html { redirect_to @feature, notice: 'Feature was successfully updated.' }
         format.json { head :no_content }
         format.js
@@ -122,11 +135,16 @@ class FeaturesController < ApplicationController
   # DELETE /features/1.json
   def destroy
     @feature = Feature.find(params[:id])
-    @feature.destroy
-
     respond_to do |format|
-      format.html { redirect_to features_url }
-      format.json { head :no_content }
+      if have_edit_permissions?(@feature)
+        @feature.destroy
+
+        format.html { redirect_to features_url }
+        format.json { head :no_content }
+      else
+        format.json { render status: :unprocessable_entity }
+        format.html { redirect_to features_url, :alert => "You don't have permissions to delete feature" }
+      end
     end
   end
 

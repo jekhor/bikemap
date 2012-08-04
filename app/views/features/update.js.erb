@@ -3,3 +3,4 @@ $('a[rel*="lightbox"]', $('#feature-popup-contents')).lightBox();
 $('#edit-link').click(function(e) {
   $('.feature-popup').load('/features/' + '<%= @feature.id %>' + '/edit');
 });
+theCustomMap.reloadFeature(<%= @feature.id %>);

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120803204614) do
+ActiveRecord::Schema.define(:version => 20120804150632) do
 
   create_table "comments", :force => true do |t|
     t.text     "text",      :null => false

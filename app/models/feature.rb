@@ -1,5 +1,7 @@
 class Feature < ActiveRecord::Base
 
+  belongs_to :user
+
   attr_accessible :geometry, :name, :description, :capacity, :comment
   attr_accessible :photo, :existing, :approved
 

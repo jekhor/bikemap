@@ -18,19 +18,8 @@ L.CustomMap =  L.GeoJSON.extend({
     pointToLayer = function(geojson) {
       var coords = geojson.geometry.coordinates;
       var latlng = new L.LatLng(coords[1], coords[0]);
-      var iconClass = geojson.properties.existing ? 'leaflet-div-icon-existing' : 'leaflet-div-icon-desired';
-      if (!geojson.properties.approved) {
-        iconClass += ' feature-notapproved';
-      }
-   
-      var icon = new L.DivIcon({
-        iconSize: new L.Point(24, 24),
-        html: '<strong>' + geojson.properties.rating + '</strong>',
-        className: iconClass
-      });
-
       var m = new L.Marker(latlng, {
-        icon: icon
+        icon: customMap._createFeatureIcon(geojson.properties)
       });
       m.properties = geojson.properties;
       customMap._features[m.properties.id] = m;
@@ -42,6 +31,21 @@ L.CustomMap =  L.GeoJSON.extend({
     options = L.Util.setOptions(this, options);
     L.GeoJSON.prototype.initialize.call(this, geojson, options);
 
+  },
+
+  _createFeatureIcon: function(properties) {
+      var iconClass = properties.existing ? 'leaflet-div-icon-existing' : 'leaflet-div-icon-desired';
+      if (!properties.approved) {
+        iconClass += ' feature-notapproved';
+      }
+   
+      var icon = new L.DivIcon({
+        iconSize: new L.Point(24, 24),
+        html: '<strong>' + properties.rating + '</strong>',
+        className: iconClass
+      });
+
+      return icon;
   },
 
   onAdd: function(map) {
@@ -58,7 +62,9 @@ L.CustomMap =  L.GeoJSON.extend({
   },
 
   _initMarker: function(m) {
-    if ($('#current-user').data('admin')) {
+    if ($('#current-user').data('admin') ||
+        ($('#current-user').data('uid') == m.properties.user_id)) {
+
       m.options.draggable = true;
       m.on("dragend", customMap.featureDragend, customMap);
     }
@@ -232,6 +238,23 @@ L.CustomMap =  L.GeoJSON.extend({
   removeSelectedFeature: function() {
     customMap._map.removeLayer(customMap._selectedFeature);
     customMap._selectedFeature = null;
+  },
+
+  reloadFeature: function(featureId) {
+    var feature = customMap._features[featureId];
+
+    $.ajax({
+      url: '/features/' + featureId,
+      type: 'GET',
+      dataType: 'json',
+      data: null,
+      contentType: 'application/json',
+      success: function(data, textStatus, jqXHR) {
+        feature.properties = data.properties;
+        feature.setLatLng(new L.LatLng(data.geometry.coordinates[1], data.geometry.coordinates[0]));
+        feature.setIcon(customMap._createFeatureIcon(data.properties));
+      }
+    });
   },
 });
 

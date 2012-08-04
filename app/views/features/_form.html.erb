@@ -21,8 +21,15 @@
     <%= f.label :description, 'Место' %>
     <%= f.text_field :description %>
   </div>
+    <% unless @feature.photo_file_name.nil? %>
   <div class="field">
-    <%= f.label :photo, 'Фотография' %>
+    <%= link_to image_tag(@feature.photo.url(:thumb)), @feature.photo.url(:large), :rel => "lightbox", :title => @feature.description %>
+      <%= check_box_tag 'remove_photo' %>
+      <%= label_tag 'remove_photo', 'Удалить фото' %>
+  </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :photo, 'Загрузить новое фото' %>
     <%= f.file_field :photo %>
   </div>
   <div class="field">
@@ -33,10 +40,12 @@
     <%= f.label :comment, 'Комментарий' %>
     <%= f.text_field :comment %>
   </div>
-  <div class="field">
-    <%= f.check_box :approved %>
-    <%= f.label :approved, 'Одобрено' %>
-  </div>
+  <% if !current_user.nil? and current_user.admin? %>
+    <div class="field">
+      <%= f.check_box :approved %>
+      <%= f.label :approved, 'Одобрено' %>
+    </div>
+  <% end %>
   <div class="submit">
     <%= f.submit 'Сохранить' %>
   </div>
