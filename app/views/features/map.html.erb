@@ -9,7 +9,7 @@
 <div id="map" style="height: 400px; width: 100%;" /></div>
 
 <% content_for :left do %>
-  <% if current_user.admin? %>
+  <% if !current_user.nil? and current_user.admin? %>
   <div class="top-features">
     <h3>На модерацию</h3>
     <% @not_approved_features.each do |feature| %>
