@@ -143,10 +143,6 @@ L.CustomMap =  L.GeoJSON.extend({
       url: '/features/' + feature.properties.id + '/toggle_like/' + vote,
       type: 'GET',
       dataType: 'script',
-/*      success: function(data, textStatus, jqXHR) {
-        feature.properties.rating = data;
-        $('#feature-popup-rating', feature._popupContent).text(data);
-      }*/
     });
   },
 

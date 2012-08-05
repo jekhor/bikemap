@@ -5,7 +5,7 @@ feature.closePopup();
 feature.openPopup();
 
 $('#feature-popup-like').click(function(e) {
-  theCustomMap.toggleLike(feature);
+  theCustomMap.toggleLike(feature, "<%= @liked ? 'dislike' : 'like' -%>");
 });
 
 $('#edit-link').click(function(e) {

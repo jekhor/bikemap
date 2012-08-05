@@ -41,14 +41,18 @@ class Feature < ActiveRecord::Base
     f
   end
 
-  def toggle_like(user)
+  def toggle_like(user, vote)
     transaction do
       if self.users_liked.include? user
-        self.users_liked.delete user
-        self.rating -= 1
+        if vote == 'dislike'
+          self.users_liked.delete user
+          self.rating -= 1
+        end
       else
-        self.users_liked << user
-        self.rating += 1
+        if vote == 'like'
+          self.users_liked << user
+          self.rating += 1
+        end
       end
       self.save
     end

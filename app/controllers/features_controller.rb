@@ -28,6 +28,7 @@ class FeaturesController < ApplicationController
   # GET /features/1.json
   def show
     @feature = Feature.find(params[:id])
+    @liked = @feature.users_liked.include? current_user if user_signed_in?
 
     respond_to do |format|
       format.html {render :layout => 'feature-popup'}
@@ -124,7 +125,7 @@ class FeaturesController < ApplicationController
 
         @feature = Feature.find(params[:id])
 
-        @feature.toggle_like(current_user)
+        @feature.toggle_like(current_user, params[:vote])
 
         format.json {render json: @feature.rating}
         format.js
