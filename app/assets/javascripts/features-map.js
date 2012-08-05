@@ -191,44 +191,6 @@ L.CustomMap =  L.GeoJSON.extend({
       type: 'GET',
       dataType: 'script',
     });
-
-    /*TODO!!! Switch to rails-driven rendering & JS */
-/*    $.get('/features/' + action, null, function(responseText, textStatus, XMLHttpRequest) {
-      popupDiv.innerHTML = responseText;
-      feature.bindPopup(popupDiv);
-      feature._popupContent = popupDiv;
-
-      $('input.cancel', popupDiv).click(function(e) {
-        customMap._map.closePopup();
-        if (newFeature) {
-          customMap._map.removeLayer(feature);
-        }
-        return false;
-      });
-
-      $('#feature-popup-like', popupDiv).click(function(e) {
-        customMap.toggleLike(feature);
-      });
-
-      $('#edit-link', popupDiv).click(function(e) {
-        $('.feature-popup').load('/features/' + feature.properties.id + '/edit', function (){
-          feature.closePopup();
-          feature.openPopup();
-          $('input.cancel', popupDiv).click(function(e) {
-            customMap._map.closePopup();
-            return false;
-          });
-        });
-      });
-
-      $('a[rel*="lightbox"]', popupDiv).lightBox();
-
-//      if (newFeature) {
-        feature.closePopup();
-        feature.openPopup();
-//      }
-    }, 'html');
-*/
   },
 
   zoomToFeature: function(featureId, zoomLevel) {
