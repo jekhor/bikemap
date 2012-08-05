@@ -230,3 +230,7 @@ init_map = function() {
 
 $(document).ready(init_map);
 
+window.disqus_no_style = true;
+$.getScript("http://disqus.com/forums/bikemap/embed.js")
+
+
