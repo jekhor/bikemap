@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MapEverything</title>
+  <title>Карта велопарковок</title>
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -27,10 +27,14 @@
       <ul>
         <li><%= link_to "Map", map_path %></li>
         <% if user_signed_in? -%>
-          <li><%= link_to "Sign out (#{current_user.name})", destroy_user_session_path, :method => :delete %></li>
+          <% if current_user.admin? %>
+            <li><%= link_to "Пользователи", users_path %></li>
+          <% end %>
+          <li><%= link_to current_user.name, edit_user_registration_path %></li>
+          <li><%= link_to "Выйти", destroy_user_session_path, :method => :delete %></li>
         <% else %>
-          <li><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></li>
-          <li><%= link_to "Sign in", new_user_session_path %></li>
+          <li><%= link_to "Войти через Facebook", user_omniauth_authorize_path(:facebook) %></li>
+          <li><%= link_to "Войти", new_user_session_path %></li>
         <% end %>
       </ul>
     </nav>
