@@ -20,6 +20,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit
+    @comment = Comment.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def show
     @comment = Comment.find(params[:id])
     respond_to do |format|
@@ -49,18 +56,23 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
         format.json { head :no_content }
+        format.js
       else
+        flash[:alert] = "Упс! С комментарием что-то не так..."
         format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
+    @comment_id = @comment.id
     @comment.destroy
 
     respond_to do |format|
       format.json { head :no_content }
+      format.js
     end
   end
 end

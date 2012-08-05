@@ -61,9 +61,21 @@ ul.comments-list {
   list-style-type: none;
 }
 
+.comment-header {
+  height: 2em;
+}
+
 .comment-author-datetime {
+  float: left;
   color: 818181;
 //  font-size: 0.8em;
+}
+
+.comment-text {
+}
+
+.comment-actions {
+  float: right;
 }
 
 li.comment {

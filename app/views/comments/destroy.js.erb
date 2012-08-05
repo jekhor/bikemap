@@ -1,0 +1,6 @@
+var div = $("#comment_<%= @comment_id -%>");
+
+div.fadeOut('slow', function(){
+  div.remove();
+});
+

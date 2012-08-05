@@ -4,7 +4,7 @@
 <% else %>
   $("#comment-alert").hide(300);
   $(":input:not(input[type=submit])").val("");
-  $('.comments-list').prepend("<%= escape_javascript(render 'comment', { :comment => @comment })%>");
+  $("#comment_<%= @comment.id -%>").replaceWith("<%= escape_javascript(render 'comment', { :comment => @comment })%>");
   $("#comment-notice").html('<div class="notice"><%= escape_javascript(notice) %></div>');
   <% flash.delete(:notice) %>
 <% end %>

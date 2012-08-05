@@ -43,7 +43,6 @@
     <div class="comment-post-container">
       <%= link_to 'Комментировать', new_comment_path, :remote => true if user_signed_in? %>
     </div>
-    <div id="comment-notice"></div>
     <ul class="comments-list">
     <% @latest_comments.each do |comment| %>
       <%= render :file => 'comments/_comment', :locals => { :comment => comment } %>
