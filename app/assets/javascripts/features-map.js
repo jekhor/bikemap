@@ -87,7 +87,6 @@ L.CustomMap =  L.GeoJSON.extend({
     customMap._selectedFeature = m;
     customMap.setPopupContent(m, true);
     customMap._map.addLayer(m);
-//    this.postFeature(m);
   },
 
   featureClick: function(e) {
@@ -96,34 +95,6 @@ L.CustomMap =  L.GeoJSON.extend({
     customMap._selectedFeature = f;
     customMap.updatePopup(f);
   },
-
-  postFeature: function(feature) {
-    var _this = this;
-    latlng = feature.getLatLng();
-    json_feature = {
-      'type': 'Feature',
-      'properties': feature.properties,
-      'geometry': {
-        'type': 'Point',
-        'coordinates': [latlng.lng, latlng.lat]
-      }
-    }
-
-    $.ajax({
-      url: '/features',
-      type: 'POST',
-      dataType: 'json',
-      data: JSON.stringify(json_feature),
-      contentType: 'application/json',
-      success: function(data, textStatus, jqXHR) {
-        feature.properties.id = data.properties.id;
-        customMap._features[feature.properties.id] = feature;
-        _this._map.addLayer(feature);
-//        _this.setPopupContent(feature, true);
-      }
-    });
-  },
-
 
   updateFeatureGeometry: function(feature) {
     latlng = feature.getLatLng();
