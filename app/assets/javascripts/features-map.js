@@ -50,7 +50,9 @@ L.CustomMap =  L.GeoJSON.extend({
 
   onAdd: function(map) {
     customMap._map = map;
-    map.on("click", customMap.onClick);
+    if ($('#current-user').size > 0)
+      map.on("click", customMap.onClick);
+
     map.on("popupclose", customMap.onPopupClose);
 
     L.GeoJSON.prototype.onAdd.call(this, map);
