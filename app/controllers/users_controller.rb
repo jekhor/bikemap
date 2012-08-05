@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def require_admin!
     authenticate_user!
     unless current_user.admin?
-      flash[:error] = "You must have admin privileges for editing users"
+      flash[:alert] = "You must have admin privileges for editing users"
       redirect_to root_url
     end
   end
