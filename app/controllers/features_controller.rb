@@ -96,8 +96,11 @@ class FeaturesController < ApplicationController
       attrs = params[:feature] if params[:feature]
     end
 
+    if params[:remove_photo]
+      @feature.photo = nil
+    end
+
     respond_to do |format|
-      logger.debug "attrs:" + attrs.inspect
       if !attrs["geometry"].nil? and !attrs["geometry"]["coordinates"].nil?
         coords = attrs["geometry"]["coordinates"]
         attrs['geometry'] = "POINT(#{coords[0]} #{coords[1]})"
