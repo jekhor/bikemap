@@ -1,6 +1,11 @@
 $('#feature-popup-contents').html("<%= escape_javascript(render :file => 'features/show')%>")
 $('a[rel*="lightbox"]', $('#feature-popup-contents')).lightBox();
 $('#edit-link').click(function(e) {
-  $('.feature-popup').load('/features/' + '<%= @feature.id %>' + '/edit');
+  $.ajax({
+    url: '/features/' + feature.properties.id + '/edit',
+    type: 'GET',
+    dataType: 'script',
+  });
 });
+
 theCustomMap.reloadFeature(<%= @feature.id %>);

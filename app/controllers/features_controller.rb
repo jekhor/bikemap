@@ -32,6 +32,7 @@ class FeaturesController < ApplicationController
     respond_to do |format|
       format.html {render :layout => 'feature-popup'}
       format.json { render json: @feature }
+      format.js
     end
   end
 
@@ -45,6 +46,7 @@ class FeaturesController < ApplicationController
     respond_to do |format|
       format.html {render :layout => 'feature-popup'}
       format.json { render json: @feature }
+      format.js
     end
   end
 
@@ -113,21 +115,27 @@ class FeaturesController < ApplicationController
     end
   end
 
-  def update_rating
+  def toggle_like
     respond_to do |format|
       begin
-      if params[:vote].to_i < 0
-        Feature.decrement_counter :rating, params[:id]
-      else
-        Feature.increment_counter :rating, params[:id]
-      end
 
-      feature = Feature.find(params[:id])
+        @feature = Feature.find(params[:id])
 
-      format.json {render json: feature.rating}
+        @feature.toggle_like(current_user)
+
+        format.json {render json: @feature.rating}
+        format.js
       rescue
         format.json {render status: :unprocessable_entity}
       end
+    end
+  end
+
+  def like_widget
+    @feature = Feature.find(params[:id])
+
+    respond_to do |format|
+      format.html {render :partial => 'like_widget'}
     end
   end
 

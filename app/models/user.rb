@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :comments
   has_many :features
+  has_and_belongs_to_many :liked_features, :join_table => :features_users_likes, :class_name => 'Feature'
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

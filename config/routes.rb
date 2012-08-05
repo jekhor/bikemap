@@ -3,7 +3,8 @@ MapEverything::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }, :path_prefix => 'd', :sign_out_via => [ :get, :post, :delete ]
 
   get 'features/map' => 'features#map', :as => 'map'
-  match 'features/:id/update_rating/:vote' => 'features#update_rating'
+  match 'features/:id/toggle_like/:vote' => 'features#toggle_like'
+  get 'features/:id/like_widget' => 'features#like_widget'
   resources :features do
   end
 

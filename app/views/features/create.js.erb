@@ -1,5 +1,7 @@
-$('#feature-popup-contents').html("<%= escape_javascript(render :file => 'features/show')%>")
-$('a[rel*="lightbox"]', $('#feature-popup-contents')).lightBox();
-$('#edit-link').click(function(e) {
-  $('.feature-popup').load('/features/' + '<%= @feature.id %>' + '/edit');
-});
+feature = theCustomMap._selectedFeature;
+
+feature.properties.id = <%= @feature.id %>;
+theCustomMap._features[feature.properties.id] = feature;
+theMap.addLayer(feature);
+theCustomMap.reloadFeature(<%= @feature.id %>);
+

@@ -1,8 +1,8 @@
 <div id="feature-popup-header">
   <img src="/assets/marker-icon.png"/>
-  <span id="feature-popup-like" class="feature-rating">Like</span>
-  <span id="feature-popup-rating" class="feature-rating"><%= @feature.rating -%></span>
-  <span id="feature-popup-dislike" class="feature-rating">Dislike</span>
+  <div id="like_widget">
+    <%= render 'like_widget' %>
+  </div>
 </div>
 <div id="feature-popup-contents">
 

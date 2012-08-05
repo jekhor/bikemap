@@ -164,15 +164,16 @@ L.CustomMap =  L.GeoJSON.extend({
     return div;
   },
 
-  updateRating: function(feature, vote) {
+  toggleLike: function(feature, vote) {
+    feature = feature || customMap._selectedFeature;
     $.ajax({
-      url: '/features/' + feature.properties.id + '/update_rating/' + vote,
+      url: '/features/' + feature.properties.id + '/toggle_like/' + vote,
       type: 'GET',
-      dataType: 'json',
-      success: function(data, textStatus, jqXHR) {
+      dataType: 'script',
+/*      success: function(data, textStatus, jqXHR) {
         feature.properties.rating = data;
         $('#feature-popup-rating', feature._popupContent).text(data);
-      }
+      }*/
     });
   },
 
@@ -185,7 +186,14 @@ L.CustomMap =  L.GeoJSON.extend({
     
     action += newFeature ? 'new?geometry=' + geometry : feature.properties.id;
 
-    $.get('/features/' + action, null, function(responseText, textStatus, XMLHttpRequest) {
+    $.ajax({
+      url: '/features/' + action,
+      type: 'GET',
+      dataType: 'script',
+    });
+
+    /*TODO!!! Switch to rails-driven rendering & JS */
+/*    $.get('/features/' + action, null, function(responseText, textStatus, XMLHttpRequest) {
       popupDiv.innerHTML = responseText;
       feature.bindPopup(popupDiv);
       feature._popupContent = popupDiv;
@@ -199,11 +207,7 @@ L.CustomMap =  L.GeoJSON.extend({
       });
 
       $('#feature-popup-like', popupDiv).click(function(e) {
-        customMap.updateRating(feature, 1);
-      });
-
-      $('#feature-popup-dislike', popupDiv).click(function(e) {
-        customMap.updateRating(feature, -1);
+        customMap.toggleLike(feature);
       });
 
       $('#edit-link', popupDiv).click(function(e) {
@@ -217,7 +221,6 @@ L.CustomMap =  L.GeoJSON.extend({
         });
       });
 
-
       $('a[rel*="lightbox"]', popupDiv).lightBox();
 
 //      if (newFeature) {
@@ -225,6 +228,7 @@ L.CustomMap =  L.GeoJSON.extend({
         feature.openPopup();
 //      }
     }, 'html');
+*/
   },
 
   zoomToFeature: function(featureId, zoomLevel) {
@@ -253,6 +257,7 @@ L.CustomMap =  L.GeoJSON.extend({
         feature.properties = data.properties;
         feature.setLatLng(new L.LatLng(data.geometry.coordinates[1], data.geometry.coordinates[0]));
         feature.setIcon(customMap._createFeatureIcon(data.properties));
+        customMap.setPopupContent(feature);
       }
     });
   },

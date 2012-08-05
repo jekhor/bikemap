@@ -1,0 +1,9 @@
+  <span id="feature-popup-rating" class="feature-rating"><%= @feature.rating -%></span>
+  <% unless current_user.nil? %>
+    <% if @feature.users_liked.include? current_user %>
+      <span id="feature-popup-like" class="feature-rating">Dislike</span>
+    <% else %>
+      <span id="feature-popup-like" class="feature-rating">Like</span>
+    <% end %>
+  <% end %>
+

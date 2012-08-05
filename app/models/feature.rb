@@ -1,6 +1,7 @@
 class Feature < ActiveRecord::Base
 
   belongs_to :user
+  has_and_belongs_to_many :users_liked, :join_table => :features_users_likes, :class_name => 'User'
 
   attr_accessible :geometry, :name, :description, :capacity, :comment
   attr_accessible :photo, :existing, :approved
@@ -38,6 +39,19 @@ class Feature < ActiveRecord::Base
     end
 
     f
+  end
+
+  def toggle_like(user)
+    transaction do
+      if self.users_liked.include? user
+        self.users_liked.delete user
+        self.rating -= 1
+      else
+        self.users_liked << user
+        self.rating += 1
+      end
+      self.save
+    end
   end
 
 end

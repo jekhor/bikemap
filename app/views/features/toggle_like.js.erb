@@ -1,0 +1,6 @@
+$('#like_widget').html("<%= escape_javascript render 'like_widget' %>")
+$('#feature-popup-like').click(function(e) {
+  theCustomMap.toggleLike(null, "<%= escape_javascript @feature.users_liked.include? current_user 'Dislike' : 'Like' %>");
+});
+
+

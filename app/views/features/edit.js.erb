@@ -1,6 +1,17 @@
-$('#feature-popup-contents').html("<%= escape_javascript(render :file => 'features/edit', :formats => ['html'])%>")
+feature = theCustomMap._selectedFeature;
+
+feature.bindPopup("<%= escape_javascript(render :file => 'features/edit', :layout => 'layouts/feature-popup', :formats => [:html])%>");
+feature.closePopup();
+feature.openPopup();
+
 $('input.cancel').click(function(e) {
   theMap.closePopup();
   return false;
 });
+
+$('#feature-popup-like').click(function(e) {
+  theCustomMap.toggleLike(feature);
+});
+
+$('a[rel*="lightbox"]').lightBox();
 

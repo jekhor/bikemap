@@ -34,6 +34,12 @@ ActiveRecord::Schema.define(:version => 20120804150632) do
     t.datetime "photo_updated_at"
     t.boolean  "existing",                                                                          :default => false
     t.boolean  "approved",                                                                          :default => false
+    t.integer  "user_id"
+  end
+
+  create_table "features_users_likes", :id => false, :force => true do |t|
+    t.integer "feature_id"
+    t.integer "user_id"
   end
 
   create_table "users", :force => true do |t|

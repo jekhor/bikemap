@@ -1,0 +1,20 @@
+feature = theCustomMap._selectedFeature;
+
+feature.bindPopup("<%= escape_javascript(render :file => 'features/show', :layout => 'layouts/feature-popup', :formats => [:html])%>");
+feature.closePopup();
+feature.openPopup();
+
+$('#feature-popup-like').click(function(e) {
+  theCustomMap.toggleLike(feature);
+});
+
+$('#edit-link').click(function(e) {
+  $.ajax({
+    url: '/features/' + feature.properties.id + '/edit',
+    type: 'GET',
+    dataType: 'script',
+  });
+});
+
+$('a[rel*="lightbox"]').lightBox();
+
