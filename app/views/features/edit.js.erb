@@ -9,6 +9,15 @@ $('input.cancel').click(function(e) {
   return false;
 });
 
+$('.feature-del-link').click(function(e) {
+  $.ajax({    url: '/features/' + feature.properties.id,
+    type: 'DELETE',
+    dataType: 'script',
+  });
+  return false;
+});
+
+
 $('#feature-popup-like').click(function(e) {
   theCustomMap.toggleLike(feature);
 });

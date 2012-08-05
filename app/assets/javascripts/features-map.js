@@ -175,8 +175,14 @@ L.CustomMap =  L.GeoJSON.extend({
   },
 
   removeSelectedFeature: function() {
-    customMap._map.removeLayer(customMap._selectedFeature);
+    customMap.removeFeature(customMap._selectedFeature.properties.id);
     customMap._selectedFeature = null;
+  },
+
+  removeFeature: function(featureId) {
+    var feature = customMap._features[featureId];
+    customMap._features[featureId] = null;
+    customMap._map.removeLayer(feature);
   },
 
   reloadFeature: function(featureId) {

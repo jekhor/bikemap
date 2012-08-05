@@ -149,9 +149,11 @@ class FeaturesController < ApplicationController
 
         format.html { redirect_to features_url }
         format.json { head :no_content }
+        format.js
       else
         format.json { render status: :unprocessable_entity }
         format.html { redirect_to features_url, :alert => "You don't have permissions to delete feature" }
+        format.js { render action: 'edit' }
       end
     end
   end

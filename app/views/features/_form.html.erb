@@ -48,8 +48,7 @@
   <% end %>
   <div class="submit">
     <%= f.submit 'Сохранить' %>
-  </div>
-  <div class="submit">
     <%= f.submit 'Отмена', :class => 'cancel' %>
+    <%= link_to 'Удалить', '#', :class => 'feature-del-link', :remote => true, :method => :delete unless @feature.id.nil? %>
   </div>
 <% end %>
