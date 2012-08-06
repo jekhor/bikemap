@@ -163,8 +163,9 @@ L.CustomMap =  L.GeoJSON.extend({
   },
 
   zoomToFeature: function(featureId, zoomLevel) {
-    zoomLevel = zoomLevel || 16;
-    feature = customMap._features[featureId];
+    var zoomLevel = zoomLevel || 16;
+    var feature = customMap._features[featureId];
+    customMap._selectedFeature = feature;
 
     customMap._map.setView(feature.getLatLng(), zoomLevel);
     customMap.updatePopup(feature);
