@@ -6,6 +6,6 @@
     <%= link_to 'Удалить', comment, :method => :delete, :remote => true, :confirm => 'Вы действительно хотите удалить комментарий?' if user_signed_in? and current_user.admin? %>
   </div>
 </div>
-<div class="comment-text"><%= comment.text %></div>
+<div class="comment-text"><%= simple_format h(comment.text) %></div>
 </li>
 
