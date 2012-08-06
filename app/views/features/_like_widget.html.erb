@@ -1,9 +1,9 @@
   <span id="feature-popup-rating" class="feature-rating"><%= @feature.rating -%></span>
   <% unless current_user.nil? %>
     <% if @feature.users_liked.include? current_user %>
-      <span id="feature-popup-like" class="feature-rating">Не нравится</span>
+      <a href="#" rel="nofollow" id="feature-popup-like" class="feature-rating">Не нравится</a>
     <% else %>
-      <span id="feature-popup-like" class="feature-rating">Нравится</span>
+      <a href="#" rel="nofollow" id="feature-popup-like" class="feature-rating">Нравится</a>
     <% end %>
   <% end %>
 
