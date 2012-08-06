@@ -64,7 +64,7 @@ L.CustomMap =  L.GeoJSON.extend({
   },
 
   _initMarker: function(m) {
-    if ($('#current-user').data('admin') ||
+    if (($('#current-user').data('admin') == true) ||
         ($('#current-user').data('uid') == m.properties.user_id)) {
 
       m.options.draggable = true;
