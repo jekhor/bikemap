@@ -47,5 +47,7 @@ gem 'leaflet-rails'
 gem 'paperclip'
 gem 'remotipart'
 gem 'devise'
+gem 'omniauth-oauth2', :git => 'git://github.com/jekhor/omniauth-oauth2.git'
 gem 'omniauth-facebook'
+gem 'omniauth-vkontakte', :git => 'git://github.com/jekhor/omniauth-vkontakte.git'
 

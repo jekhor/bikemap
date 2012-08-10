@@ -30,6 +30,21 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.find_for_vkontakte_oauth(auth, signed_in_resource=nil)
+    user = User.where(:provider => auth.provider, :uid => auth.uid.to_s).first
+    unless user
+      user = User.create(name: "#{auth.info.first_name} #{auth.info.last_name}",
+                         provider:auth.provider,
+                         uid:auth.uid.to_s,
+                         email:auth.extra.raw_info.domain + '@vk.com',
+                         password:Devise.friendly_token[0,20]
+                        )
+
+    end
+    user
+  end
+
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]

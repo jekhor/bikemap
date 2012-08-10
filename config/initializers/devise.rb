@@ -209,6 +209,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 
   config.omniauth :facebook, "423233384387219", "6e17440c786547d27e6269a76890e7ba"
+  config.omniauth :vkontakte, "3072408", "fWBO7azMQHr7AlUAEcm3", :scope => 'notify'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
