@@ -1,20 +1,33 @@
-<h1>Listing features</h1>
+<h1>Список велопарковок</h1>
 
 <table>
   <tr>
-    <th></th>
-    <th></th>
+    <th>№</th>
+    <th>Фото</th>
+    <th>Тип</th>
+    <th>Рейтинг</th>
+    <th>Описание</th>
+    <th>Ёмкость</th>
+    <th>Комментарий</th>
+    <th>Одобрено?</th>
     <th></th>
   </tr>
 
+  <% i = 1 %>
 <% @features.each do |feature| %>
   <tr>
-    <td><%= feature.name %></td>
-    <td><%= feature.geometry %></td>
-    <td><%= link_to 'Show', feature %></td>
-    <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
-    <td><%= link_to 'Destroy', feature, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= i %></td>
+    <td><%= link_to image_tag(feature.photo.url(:thumb)), feature.photo.url(:large), :rel => "lightbox", :title => feature.description  unless feature.photo_file_name.nil? %></td>
+    <td><%= feature.existing ? 'Существующая' : 'Желаемая' %></td>
+    <td><%= feature.rating %></td>
+    <td><%= feature.description %></td>
+    <td><%= feature.capacity %></td>
+    <td><%= feature.comment %></td>
+    <td><%= feature.approved ? 'Да' : 'Нет' %></td>
+    <td><%= link_to 'Редактировать', edit_feature_path(feature) %> | 
+    <%= link_to 'Удалить', feature, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
+  <% i += 1 %>
 <% end %>
 </table>
 

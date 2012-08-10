@@ -7,6 +7,9 @@
 
 <%= tag 'div', id: 'current-user', data: {uid: current_user.id, admin: current_user.admin?, name: current_user.name} unless current_user.nil? %>
 <div id="map" style="height: 400px; width: 100%;" /></div>
+<% if user_signed_in? and current_user.admin? %>
+  <p><%= link_to "Список парковок", features_path %></p>
+<% end %>
 
 <% content_for :left do %>
   <% if !current_user.nil? and current_user.admin? %>
