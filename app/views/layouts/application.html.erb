@@ -30,10 +30,9 @@
           <% if current_user.admin? %>
             <li><%= link_to "Пользователи", users_path %></li>
           <% end %>
-          <li><%= link_to current_user.name, edit_user_registration_path %></li>
+          <li><%= link_to_user current_user %></li>
           <li><%= link_to "Выйти", destroy_user_session_path, :method => :delete %></li>
         <% else %>
-          <li><%= link_to "Войти через Facebook", user_omniauth_authorize_path(:facebook) %></li>
           <li><%= link_to "Войти", new_user_session_path %></li>
         <% end %>
       </ul>

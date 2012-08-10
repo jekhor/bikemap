@@ -19,8 +19,10 @@
 </div>
 
 <div id="login_alternatives">
-  <ul>
-    <li><%= link_to "Войти через Facebook", user_omniauth_authorize_path(:facebook) %></li>
-    <li><%= link_to "Войти через ВКонтакте", user_omniauth_authorize_path(:vkontakte) %></li>
-  </ul>
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <%= image_tag "button-#{provider.to_s}.png", :class => 'user-icon' %>
+      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
+    <% end -%>
+  <% end -%>
 </div>

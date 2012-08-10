@@ -102,3 +102,8 @@ p.comment-text {
   float: right;
   width: 40%;
 }
+
+.user-icon {
+  position: relative;
+  top: 3px;
+}
