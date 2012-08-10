@@ -13,7 +13,7 @@ class FeaturesController < ApplicationController
   # GET /features
   # GET /features.json
   def index
-    @features = Feature.all(:order => 'rating ASC')
+    @features = Feature.all(:order => 'rating DESC')
 
     respond_to do |format|
       format.html # index.html.erb
