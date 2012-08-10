@@ -84,7 +84,7 @@ L.CustomMap =  L.GeoJSON.extend({
 
   onClick: function(e) {
     var m = new L.Marker(e.latlng);
-    m.properties = {rating: 0};
+    m.properties = {rating: 0, user_id: $('#current-user').data('uid')};
     customMap._initMarker(m);
     customMap._selectedFeature = m;
     customMap.setPopupContent(m, true);
