@@ -73,6 +73,7 @@ class FeaturesController < ApplicationController
 
     respond_to do |format|
       if @feature.save
+        @feature.toggle_like(current_user, 'like')
         format.html { redirect_to @feature, notice: 'Feature was successfully created.' }
         format.json { render json: @feature, status: :created, location: @feature }
         format.js
