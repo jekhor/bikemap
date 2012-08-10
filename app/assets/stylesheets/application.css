@@ -92,3 +92,13 @@ p.comment-text {
 
 .comment-post-field {
 }
+
+#login_box {
+  float: left;
+  width: 30%;
+}
+
+#login_alternatives {
+  float: right;
+  width: 40%;
+}
