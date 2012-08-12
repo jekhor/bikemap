@@ -13,7 +13,16 @@ class FeaturesController < ApplicationController
   # GET /features
   # GET /features.json
   def index
-    @features = Feature.all(:order => 'rating DESC')
+    if !user_signed_in?
+      @features = Feature.where(:approved => true)
+    else
+      if current_user.admin?
+        @features = Feature.all
+      else
+        @features = Feature.where('approved = ? OR user_id = ?', true, current_user.id)
+      end
+    end
+    @features = @features.order('rating DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -164,7 +173,7 @@ class FeaturesController < ApplicationController
   end
 
   def map
-    @top_features = Feature.all(:order => 'rating DESC', :limit => 20)
+    @top_features = Feature.where(:approved => true).order('rating DESC').limit(20)
     @not_approved_features = Feature.where(:approved => false)
     @latest_comments = Comment.page(params[:comments_page]).order('posted_on DESC')
     render
