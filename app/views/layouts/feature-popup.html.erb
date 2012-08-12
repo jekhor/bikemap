@@ -1,7 +1,12 @@
 <div id="feature-popup-header">
-  <div id="like_widget">
-    <%= render 'like_widget' %>
-  </div>
+  <% unless @title.nil? %>
+    <h3><%= @title %></h3>
+  <% end %>
+  <% unless @hide_like %>
+    <div id="like_widget">
+      <%= render 'like_widget' %>
+    </div>
+  <% end %>
 </div>
 <div id="feature-popup-contents">
 

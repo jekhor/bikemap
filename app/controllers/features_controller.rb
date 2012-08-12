@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class FeaturesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show, :map]
   helper_method :have_edit_permissions?
@@ -49,6 +51,8 @@ class FeaturesController < ApplicationController
   # GET /features/new
   # GET /features/new.json
   def new
+    @title = "Создание новой точки"
+    @hide_like = true
     @feature = Feature.new
     @feature.geometry = params[:geometry]
     @feature.user = current_user
