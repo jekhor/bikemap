@@ -17,7 +17,7 @@ class FeaturesController < ApplicationController
       @features = Feature.where(:approved => true)
     else
       if current_user.admin?
-        @features = Feature.all
+        @features = Feature.where('')
       else
         @features = Feature.where('approved = ? OR user_id = ?', true, current_user.id)
       end
