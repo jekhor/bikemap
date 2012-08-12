@@ -6,4 +6,6 @@ class Comment < ActiveRecord::Base
   validates :posted_on, :presence => true
   validates :text, :presence => true
   validates :user_id, :presence => true
+
+  self.per_page = 10
 end
