@@ -25,7 +25,9 @@
   <div id="header" class="span-24 last">
     <nav>
       <ul>
-        <li><%= link_to "Карта", map_path %></li>
+        <% unless action_name == "map" %>
+          <li><%= link_to "Карта", map_path %></li>
+        <% end %>
         <% if user_signed_in? -%>
           <% if current_user.admin? %>
             <li><%= link_to "Пользователи", users_path %></li>
