@@ -7,3 +7,10 @@ ru:
         remember_me: "Запомнить меня"
         password_confirmation: "Подтверждение пароля"
         name: "Имя пользователя"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "адрес уже занят"
+

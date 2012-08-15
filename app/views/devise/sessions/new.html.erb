@@ -22,7 +22,7 @@
   <%- if devise_mapping.omniauthable? %>
     <%- resource_class.omniauth_providers.each do |provider| %>
       <%= image_tag "button-#{provider.to_s}.png", :class => 'user-icon' %>
-      <%= link_to "Войти через #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
+      <%= link_to "Войти через #{omniauth_provider_name(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
     <% end -%>
   <% end -%>
 </div>

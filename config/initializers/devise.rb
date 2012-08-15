@@ -210,6 +210,8 @@ Devise.setup do |config|
 
   config.omniauth :facebook, "423233384387219", "6e17440c786547d27e6269a76890e7ba"
   config.omniauth :vkontakte, "3072408", "fWBO7azMQHr7AlUAEcm3", :scope => 'notify'
+  config.omniauth :google_oauth2, "34913972516-0tbakt53smtlst6d59jbs2h928qg7i0b.apps.googleusercontent.com", "85CTTgAIclSqMWdL1OWsi84M", access_type: 'online',  approval_prompt: ''
+  config.omniauth :mailru, "683803", "8f85e05da91ada1d4633a08bac2dc881"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

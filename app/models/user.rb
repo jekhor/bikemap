@@ -45,6 +45,35 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.find_for_google_oauth2(auth, signed_in_resource=nil)
+    logger.debug auth.inspect
+    user = User.where(:provider => auth.provider, :uid => auth.uid.to_s).first
+    unless user
+      user = User.create(name: auth.info.name,
+                         provider:auth.provider,
+                         uid:auth.uid.to_s,
+                         email:auth.info.email,
+                         password:Devise.friendly_token[0,20]
+                        )
+
+    end
+    user
+  end
+
+  def self.find_for_mailru_oauth(auth, signed_in_resource=nil)
+    logger.debug auth.inspect
+    user = User.where(:provider => auth.provider, :uid => auth.uid.to_s).first
+    unless user
+      user = User.create(name: auth.info.name,
+                         provider:auth.provider,
+                         uid:auth.uid.to_s,
+                         email:auth.info.email,
+                         password:Devise.friendly_token[0,20]
+                        )
+
+    end
+    user
+  end
 
   def self.new_with_session(params, session)
     super.tap do |user|
