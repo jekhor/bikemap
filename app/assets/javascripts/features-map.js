@@ -83,6 +83,12 @@ L.CustomMap =  L.GeoJSON.extend({
   },
 
   onClick: function(e) {
+
+    if (customMap._map.getZoom() < 17) {
+      customMap._map.setView(e.latlng, 17);
+      return;
+    }
+
     var m = new L.Marker(e.latlng);
     m.properties = {rating: 0, user_id: $('#current-user').data('uid')};
     customMap._initMarker(m);
