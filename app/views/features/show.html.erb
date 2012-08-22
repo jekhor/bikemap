@@ -3,25 +3,20 @@
 <% end %>
 
 <div>
-  <strong><%= @feature.existing? ? 'Существующая' : 'Желаемая' %></strong>
-<div>
-  <strong>Адрес:</strong><br/>
   <%= @feature.description %>
 </div>
 <div>
-  <strong>Фото:</strong><br/>
   <%= link_to image_tag(@feature.photo.url(:thumb)), @feature.photo.url(:large), :rel => "lightbox", :title => @feature.description  unless @feature.photo_file_name.nil? %>
 </div>
-<div>
+<!--<div>
   <strong>Ёмкость:</strong>
   <%= @feature.capacity %>
-</div>
+</div>-->
 <div>
-  <strong>Комментарий:</strong><br/>
   <%= @feature.comment %>
 </div>
 <div>
-  <strong>Автор:</strong><br/>
+  <strong>Автор:</strong>
   <%= @feature.user.name %>
 </div>
 

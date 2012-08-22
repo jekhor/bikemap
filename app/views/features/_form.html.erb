@@ -1,7 +1,5 @@
 <% if @feature.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@feature.errors.count, "error") %> prohibited this member from being saved:</h2>
-
     <ul>
       <% @feature.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -13,12 +11,11 @@
 <%= form_for @feature, :remote => true do |f| %>
   <%= f.hidden_field :geometry unless @feature.geometry.nil? %>
   <div class="field">
-    <%= f.label :existing, 'Тип' %>
-    <%= f.radio_button :existing, false %><%= f.label :existing, 'Желаемая', :for => false %>
-    <%= f.radio_button :existing, true %><%= f.label :existing, 'Существующая', :for => true %>
+    <%= f.radio_button :existing, false %><%= f.label :existing, 'Желаемая', :value => false %>
+    <%= f.radio_button :existing, true %><%= f.label :existing, 'Существующая', :value => true %>
   </div>
-  <div class="field">
-    <%= f.label :description, 'Адрес' %>
+  <div class="field mandatory">
+    <%= f.label :description, 'Адрес:' %><br/>
     <%= f.text_field :description %>
   </div>
     <% unless @feature.photo_file_name.nil? %>
@@ -28,16 +25,18 @@
       <%= label_tag 'remove_photo', 'Удалить фото' %>
   </div>
   <% end %>
-  <div class="field">
-    <%= f.label :photo, 'Загрузить новое фото' %>
+  <div class="field hidden" id="photo">
+    <%= f.label :photo, 'Загрузить фото:' %><br/>
     <%= f.file_field :photo %>
   </div>
+  <!--
   <div class="field">
-    <%= f.label :capacity, 'Ёмкость' %>
+    <%= f.label :capacity, 'Ёмкость:' %>
     <%= f.number_field :capacity, :min => 1, :size => 3 %>
   </div>
+  -->
   <div class="field">
-    <%= f.label :comment, 'Комментарий' %>
+    <%= f.label :comment, 'Комментарий:' %><br/>
     <%= f.text_field :comment %>
   </div>
   <% if !current_user.nil? and current_user.admin? %>

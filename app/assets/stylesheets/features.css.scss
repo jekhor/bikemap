@@ -60,3 +60,36 @@ div.popup-loading {
   top: 4px;
 }
 
+h3#popup-title {
+  margin-bottom: 0;
+}
+
+h4 {
+  font-weight: normal;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+#feature-popup-contents .field {
+  width: 250px;
+}
+
+.mandatory label:before {
+  content: '*';
+  color: red;
+}
+
+div.hidden {
+  display: none;
+}
+
+#like_widget {
+  width: 100%;
+  text-align: center;
+}
+
+#feature-popup-rating {
+  font-size: 20pt;
+}
+
+

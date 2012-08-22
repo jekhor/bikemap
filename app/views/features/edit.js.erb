@@ -18,9 +18,8 @@ $('.feature-del-link').click(function(e) {
 });
 
 
-$('#feature-popup-like').click(function(e) {
-  theCustomMap.toggleLike(feature);
-});
-
 $('a[rel*="lightbox"]').lightBox();
 
+$('input[name="feature[existing]"]').click(function(e) {
+  $('.field#photo').toggle($('feature_existing_true').checked);
+});

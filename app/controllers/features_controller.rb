@@ -56,6 +56,7 @@ class FeaturesController < ApplicationController
   # GET /features/1.json
   def show
     @feature = Feature.find(params[:id])
+    @title = @feature.existing? ? "Велопарковка" : "Здесь нужна велопарковка!"
     @liked = @feature.users_liked.include? current_user if user_signed_in?
 
     respond_to do |format|
@@ -69,6 +70,7 @@ class FeaturesController < ApplicationController
   # GET /features/new.json
   def new
     @title = "Создание новой точки"
+    @subtitle = "Пожалуйста, заполните форму"
     @hide_like = true
     @feature = Feature.new
     @feature.geometry = params[:geometry]
@@ -83,6 +85,8 @@ class FeaturesController < ApplicationController
 
   # GET /features/1/edit
   def edit
+    @title = "Редактирование точки"
+    @hide_like = true
     @feature = Feature.find(params[:id])
     respond_to do |format|
       format.html {render :layout => 'feature-popup'}

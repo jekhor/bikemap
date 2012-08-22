@@ -1,9 +1,11 @@
+<% if @feature.approved? %>
+  <% unless current_user.nil? %>
+    <a href="#" rel="nofollow" id="feature-popup-dislike" class="feature-rating"><%= image_tag 'minus-24px.png' -%></a>
+  <% end %>
   <span id="feature-popup-rating" class="feature-rating"><%= @feature.rating -%></span>
   <% unless current_user.nil? %>
-    <% if @feature.users_liked.include? current_user %>
-      <a href="#" rel="nofollow" id="feature-popup-like" class="feature-rating">Не нравится</a>
-    <% else %>
-      <a href="#" rel="nofollow" id="feature-popup-like" class="feature-rating">Нравится</a>
-    <% end %>
+    <a href="#" rel="nofollow" id="feature-popup-like" class="feature-rating"><%= image_tag 'plus-24px.png' -%></a>
   <% end %>
-
+<% else %>
+  Точка станет доступной для голосования после проверки модератором.
+<% end %>

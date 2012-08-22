@@ -1,0 +1,11 @@
+ru:
+   activerecord:
+    attributes:
+      feature:
+        description: "Адрес"
+    errors:
+      models:
+        feature:
+          attributes:
+            description:
+              blank: "не может быть пустым"
