@@ -84,6 +84,12 @@ L.CustomMap =  L.GeoJSON.extend({
 
   onClick: function(e) {
 
+    if (customMap._selectedFeature != null) {
+      customMap._map.closePopup();
+      customMap._selectedFeature = null;
+      return;
+    }
+
     if (customMap._map.getZoom() < 17) {
       customMap._map.setView(e.latlng, 17);
       return;
