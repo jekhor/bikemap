@@ -1,5 +1,5 @@
 ru:
-   activerecord:
+  activerecord:
     attributes:
       feature:
         description: "Адрес"
@@ -9,3 +9,8 @@ ru:
           attributes:
             description:
               blank: "не может быть пустым"
+  will_paginate:
+    previous_label: "&#8592; Предыдущие"
+    next_label: "Следующие &#8594;"
+    page_gap: "&hellip;"
+
