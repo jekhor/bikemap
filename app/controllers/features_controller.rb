@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class FeaturesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show, :map]
+  before_filter :authenticate_user!, :except => [:index, :show, :map, :feed]
   helper_method :have_edit_permissions?
 
   private
@@ -32,6 +32,23 @@ class FeaturesController < ApplicationController
         feature_collection = {:type => 'FeatureCollection', :features => @features}
         render json: feature_collection
       }
+    end
+  end
+
+  def feed
+    if params[:show_unapproved]
+      @title = "Карта велопарковок — для модераторов"
+      @features = Feature.order('created_at DESC')
+    else
+      @title = "Карта велопарковок — последние"
+      @features = Feature.where(:approved => true).order('created_at DESC')
+    end
+
+    @updated = @features.first.updated_at unless @features.empty?
+
+    respond_to do |format|
+      format.rss { redirect_to feed_path(:format => :atom), :status => :moved_permanently }
+      format.atom
     end
   end
 

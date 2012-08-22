@@ -2,6 +2,16 @@ MapEverything::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }, :path_prefix => 'd', :sign_out_via => [ :get, :post, :delete ]
 
+  get '/feed' => 'features#feed',
+    :as => :feed,
+    :defaults => { :format => 'atom' },
+    :show_unapproved => false
+
+  get '/moderator_feed' => 'features#feed',
+    :as => :moderator_feed,
+    :defaults => { :format => 'atom' },
+    :show_unapproved => true
+
   get 'features/map' => 'features#map', :as => 'map'
   match 'features/:id/toggle_like/:vote' => 'features#toggle_like'
   get 'features/:id/like_widget' => 'features#like_widget'

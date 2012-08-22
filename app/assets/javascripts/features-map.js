@@ -171,10 +171,16 @@ L.CustomMap =  L.GeoJSON.extend({
   zoomToFeature: function(featureId, zoomLevel) {
     var zoomLevel = zoomLevel || 16;
     var feature = customMap._features[featureId];
+
+    if (feature == null)
+      return false;
+
     customMap._selectedFeature = feature;
 
     customMap._map.setView(feature.getLatLng(), zoomLevel);
     customMap.updatePopup(feature);
+
+    return true;
   },
 
   removeSelectedFeature: function() {
@@ -211,6 +217,18 @@ var theMap = null;
 var theCustomMap = null;
 
 init_map = function() {
+
+  var params = {};
+  var idx = window.location.href.indexOf('?');
+
+  if (idx >= 0) {
+    params = window.location.href.slice(idx + 1).split('&');
+    for(var i = 0; i < params.length; i++) {
+      var tmp = decodeURIComponent((params[i] + '').replace(/\+/g, '%20')).split('=');
+      params[tmp[0]] = tmp[1];
+    }
+  }
+
   map = new L.Map('map');
   theMap = map;
   osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: 'OSM'});
@@ -229,6 +247,11 @@ init_map = function() {
 
   $.getJSON('/features.json', function(data) {
     featureLayer.addData(data);
+
+    if (params.feature != null) {
+      featureLayer.zoomToFeature(params.feature);
+    }
+
   });
 
   $('a.feature-top-item').click(function() {

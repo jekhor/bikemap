@@ -18,6 +18,8 @@
 
   <%= stylesheet_link_tag  controller_name, :media => "all" unless MapEverything::Application.assets.find_asset("#{controller_name}.css").nil? %>
 
+  <%= auto_discovery_link_tag :atom, "/feed" %>
+  <%= auto_discovery_link_tag :rss, "/feed.rss" %>
 </head>
 <body>
 
@@ -65,6 +67,14 @@
       </div>
 
   <div id="footer" class="span-24 last">
+    <p>
+    <%= link_to feed_path do
+      image_tag('feed.png', :class => 'link-icon') + ' RSS'
+    end %><br/>
+    <%= link_to moderator_feed_path do
+      image_tag('feed.png', :class => 'link-icon') + ' RSS — модераторское'
+    end  if user_signed_in? and current_user.admin? %>
+    </p>
     <%= yield(:footer) %>
   </div>
   </div>
