@@ -12,6 +12,18 @@
  *= require jquery.lightbox-0.5
 */
 
+body {
+  background-color: #f4f4f4;
+}
+
+a {
+  color: #AE3232;
+}
+
+a:focus, a:hover {
+  color:#cf5757;
+}
+
 /* Navigation */
 
 nav {
@@ -19,7 +31,6 @@ nav {
 }
 
 nav {
-  background-color: white;
   padding: 0 0.7em;
   white-space: nowrap;
 }
@@ -62,7 +73,7 @@ ul.comments-list {
 }
 
 .comment-header {
-  height: 2em;
+  height: 4em;
 }
 
 .comment-author-datetime {
@@ -79,7 +90,7 @@ ul.comments-list {
 }
 
 li.comment {
-  background-color: #eeeeee;
+  background-color: white;
   margin-bottom: 10px;
 }
 
