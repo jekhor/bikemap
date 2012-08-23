@@ -24,6 +24,10 @@ a:focus, a:hover {
   color:#cf5757;
 }
 
+h3 {
+  font-weight: bold;
+}
+
 /* Navigation */
 
 nav {
@@ -131,7 +135,8 @@ p.comment-text {
   padding-bottom: 0;
   margin-bottom: 20px;
   background-color: #f0f0f0;
-  h2 {
+}
+#error_explanation  h2 {
     text-align: left;
     font-weight: bold;
     padding: 5px 5px 5px 15px;
@@ -139,8 +144,13 @@ p.comment-text {
     margin: -7px;
     margin-bottom: 0px;
     background-color: #c00;
-    color: #fff; }
-  ul li {
+    color: #fff;
+}
+#error_explanation  ul li {
     font-size: 12px;
-    list-style: square; }
-  }
+    list-style: square;
+}
+
+#center {
+  padding-bottom: 20px;
+}

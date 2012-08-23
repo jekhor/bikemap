@@ -5,7 +5,10 @@
   <%= javascript_include_tag "features-map" %>
 <% end %>
 
-<%= tag 'div', id: 'current-user', data: {uid: current_user.id, admin: current_user.admin?, name: current_user.name} unless current_user.nil? %>
+<% unless current_user.nil? %>
+  <%= tag 'div', id: 'current-user', data: {uid: current_user.id, admin: current_user.admin?, name: current_user.name}, :open => true %></div>
+<% end %>
+
 <div id="map" style="height: 400px; width: 100%;" /></div>
 <% if user_signed_in? and current_user.admin? %>
   <p><%= link_to "Список парковок", features_path %></p>
@@ -13,29 +16,33 @@
 
 <% content_for :left do %>
   <% if !current_user.nil? and current_user.admin? %>
-  <div class="top-features">
-    <h3>На модерацию</h3>
-    <% @not_approved_features.each do |feature| %>
-      <div class="feature">
-        <a href="#" class="feature-top-item" id="feature_top_item_<%= feature.id -%>">
-        <img src="/assets/marker-icon.png" />
-        <%= feature.description %>
-      </a>
-      </div>
-    <% end %>
-  </div>
+    <div class="top-features">
+      <h3>На модерацию</h3>
+      <ul>
+        <% @not_approved_features.each do |feature| %>
+          <li class="feature">
+          <a href="#" class="feature-top-item" id="feature_top_item_<%= feature.id -%>">
+            <div class="feature-list-icon leaflet-div-icon-<%= feature.existing? ? 'existing' : 'desired' -%> <%= 'feature-notapproved' unless feature.approved? %>"><strong><%= feature.rating %></strong></div>
+            <%= feature.description %>
+          </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
 
   <% end %>
   <div class="top-features">
-    <h3>Топ-20 велопарковок</h3>
-    <% @top_features.each do |feature| %>
-      <div class="feature">
+    <h3>Последние 20</h3>
+    <ul>
+      <% @top_features.each do |feature| %>
+        <li class="feature">
         <a href="#" class="feature-top-item" id="feature_top_item_<%= feature.id -%>">
-        <img src="/assets/marker-icon.png" />
-        <%= feature.description %>
-      </a>
-      </div>
-    <% end %>
+          <div class="feature-list-icon leaflet-div-icon-<%= feature.existing? ? 'existing' : 'desired' -%> <%= 'feature-notapproved' unless feature.approved? %>"><strong><%= feature.rating %></strong></div>
+          <%= feature.description %>
+        </a>
+        </li>
+      <% end %>
+    </ul>
   </div>
 <% end %>
 

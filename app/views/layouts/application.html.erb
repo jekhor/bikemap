@@ -45,26 +45,26 @@
     <%= yield(:header) %>
   </div>
 
-    <div class="span-24 last">
-      <div id="center">
-        <% unless notice.nil? %>
-          <p class="notice"><%= notice %></p>
-        <% end %>
-        <% unless alert.nil? %>
-          <p class="alert"><%= alert %></p>
-        <% end %>
+  <div class="span-24 last">
+    <div id="center">
+      <% unless notice.nil? %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% unless alert.nil? %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
 
-        <%= yield %>
-      </div>
+      <%= yield %>
+    </div>
 
-        <div id="left" class="span-6">
-          <%= yield(:left) %>
-        </div>
+    <div id="left" class="span-6">
+      <%= yield(:left) %>
+    </div>
 
-        <div id="right" class="span-18 last">
-          <%= yield(:bottom) %>
-        </div>
-      </div>
+    <div id="right" class="span-18 last">
+      <%= yield(:bottom) %>
+    </div>
+  </div>
 
   <div id="footer" class="span-24 last">
     <p>
