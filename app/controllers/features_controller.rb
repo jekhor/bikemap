@@ -32,6 +32,7 @@ class FeaturesController < ApplicationController
         feature_collection = {:type => 'FeatureCollection', :features => @features}
         render json: feature_collection
       }
+      format.csv { render csv: @features, :filename => 'bikeparkings' }
     end
   end
 

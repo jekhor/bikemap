@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Feature < ActiveRecord::Base
 
   belongs_to :user
@@ -17,6 +19,17 @@ class Feature < ActiveRecord::Base
 
   set_rgeo_factory_for_column(:latlon, RGeo::Geographic.spherical_factory(:srid => 4326))
   RGeo::ActiveRecord::GeometryMixin.set_json_generator(:geojson)
+
+  comma do
+    geometry 'Координаты'
+    existing 'Тип' do |existing| existing ? 'Существующая' : 'Желаемая' end
+    rating 'Рейтинг'
+    description 'Адрес или название места'
+    comment 'Комментарий'
+    capacity 'Ёмкость'
+    approved 'Одобрено?' do |approved| approved ? 'Да' : 'Нет' end
+  end
+
 
   def as_json(params)
     properties = self.attributes.dup

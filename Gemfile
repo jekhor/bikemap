@@ -54,4 +54,5 @@ gem 'omniauth-vkontakte', :git => 'git://github.com/jekhor/omniauth-vkontakte.gi
 gem 'omniauth-google-oauth2'
 gem 'omniauth-mailru'
 gem 'will_paginate'
+gem 'comma'
 
