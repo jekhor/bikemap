@@ -24,13 +24,10 @@ a:focus, a:hover {
   color:#cf5757;
 }
 
-h3 {
-  font-weight: bold;
-}
-
 h1, h2, h3, h4, h5 {
   color: #922A2A;
   font-family: "Century Gothic","Times New Roman",Georgia,Times,Serif;
+  font-weight: normal;
 }
 
 /* Navigation */
