@@ -267,6 +267,13 @@ init_map = function() {
   map.addLayer(osm);
   map.addLayer(featureLayer);
 
+  var attrib = new L.Control.Attribution({
+    position: 'bottomleft',
+    prefix: '<a href="http://velogrodno.by/">velogrodno.by</a>'
+  });
+
+  map.addControl(attrib);
+
   $.getJSON('/features.json', function(data) {
     featureLayer.addData(data);
 
