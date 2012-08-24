@@ -25,8 +25,16 @@
 <body>
 
   <div class="container">
-  <div id="header" class="span-24 last">
-    <nav>
+    <div id="header" class="span-24 last">
+      <nav id="secondary">
+      <ul>
+      <% if user_signed_in? and current_user.admin? %>
+        <li><%= link_to "Список парковок", features_path %></li>
+      </ul>
+      <% end %>
+
+      </nav>
+    <nav id="main">
       <ul>
         <% unless action_name == "map" %>
           <li><%= link_to "Карта", map_path %></li>
