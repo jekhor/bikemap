@@ -54,6 +54,7 @@ L.CustomMap =  L.GeoJSON.extend({
       map.on("click", customMap.onClick);
 
     map.on("popupclose", customMap.onPopupClose);
+    map.on("zoomend", customMap.onMapZoomEnd);
 
     L.GeoJSON.prototype.onAdd.call(this, map);
   },
@@ -63,15 +64,30 @@ L.CustomMap =  L.GeoJSON.extend({
     L.GeoJSON.prototype.onRemove.call(this, map);
   },
 
-  _initMarker: function(m) {
-    if (($('#current-user').data('admin') == true) ||
-        ($('#current-user').data('uid') == m.properties.user_id)) {
+  _markerShouldBeDraggable: function(m) {
+    return (($('#current-user').data('admin') == true) ||
+        ($('#current-user').data('uid') == m.properties.user_id)) &&
+      (customMap._map.getZoom() >= 16);
+  },
 
-      m.options.draggable = true;
+  _initMarker: function(m) {
+    m.options.draggable = customMap._markerShouldBeDraggable(m);
+
+    if (m.options.draggable)
       m.on("dragend", customMap.featureDragend, customMap);
-    }
 
     m.on("click", customMap.featureClick, customMap); 
+  },
+
+  onMapZoomEnd: function(e) {
+    for (i in customMap._features) {
+      var m = customMap._features[i];
+      if (customMap._markerShouldBeDraggable(m)) {
+        m.dragging.enable();
+      } else {
+        m.dragging.disable();
+      }
+    }
   },
 
   onPopupClose: function(e) {
