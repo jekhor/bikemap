@@ -18,7 +18,6 @@ class User < ActiveRecord::Base
   attr_accessible :login
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-    logger.debug auth.inspect
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
       user = User.create(name:auth.extra.raw_info.name,
@@ -46,7 +45,6 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_google_oauth2(auth, signed_in_resource=nil)
-    logger.debug auth.inspect
     user = User.where(:provider => auth.provider, :uid => auth.uid.to_s).first
     unless user
       user = User.create(name: auth.info.name,
@@ -61,7 +59,6 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_mailru_oauth(auth, signed_in_resource=nil)
-    logger.debug auth.inspect
     user = User.where(:provider => auth.provider, :uid => auth.uid.to_s).first
     unless user
       user = User.create(name: auth.info.name,
