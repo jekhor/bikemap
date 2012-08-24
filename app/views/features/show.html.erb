@@ -16,7 +16,7 @@
   <%= @feature.comment %>
 </div>
 <div>
-  <strong><%= @feature.user.name %></strong> <%= @feature.created_at %>
+  <strong><%= @feature.user.name %></strong> <%= @feature.created_at.strftime('%d.%m.%Y') %>
 </div>
 
 

@@ -16,7 +16,7 @@
 
 <% content_for :left do %>
   <% if !current_user.nil? and current_user.admin? %>
-    <div class="top-features">
+    <div class="top-features custom-block">
       <h3>На модерацию</h3>
       <ul>
         <% @not_approved_features.each do |feature| %>
@@ -31,7 +31,7 @@
     </div>
 
   <% end %>
-  <div class="top-features">
+  <div class="top-features custom-block">
     <h3>Последние 15</h3>
     <ul>
       <% @top_features.each do |feature| %>
@@ -48,7 +48,7 @@
 
 
 <% content_for :bottom do %>
-  <div id="comments-latest" class="comments-latest">
+  <div id="comments-latest" class="comments-latest custom-block">
     <h3>Комментарии</h3>
     <div class="comment-post-container">
       <%= link_to 'Комментировать', new_comment_path, :remote => true if user_signed_in? %>
