@@ -7,7 +7,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
 #      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
-      sign_in_and_redirect @user, :event => :authentication
+      sign_in @user, :event => :authentication
+      render 'omniauth_callback', :layout => false
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
       flash[:alert] = @user.errors.full_messages.join("<br/>") if @user.errors.any?
@@ -21,7 +22,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
 #      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "ВКонтакте"
-      sign_in_and_redirect @user, :event => :authentication
+      sign_in @user, :event => :authentication
+      render 'omniauth_callback', :layout => false
     else
       session["devise.vkontakte_data"] = request.env["omniauth.auth"]
       flash[:alert] = @user.errors.full_messages.join("<br/>") if @user.errors.any?
@@ -35,7 +37,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
 #      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
-      sign_in_and_redirect @user, :event => :authentication
+      sign_in @user, :event => :authentication
+      render 'omniauth_callback', :layout => false
     else
       session["devise.google_oauth2_data"] = request.env["omniauth.auth"]
       flash[:alert] = @user.errors.full_messages.join("<br/>") if @user.errors.any?
@@ -49,7 +52,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
 #      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Mail.Ru"
-      sign_in_and_redirect @user, :event => :authentication
+      sign_in @user, :event => :authentication
+      render 'omniauth_callback', :layout => false
     else
       session["devise.mailru_oauth_data"] = request.env["omniauth.auth"]
       flash[:alert] = @user.errors.full_messages.join("<br/>") if @user.errors.any?

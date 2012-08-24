@@ -1,0 +1,12 @@
+<html>
+  <head></head>
+  <body>
+    <script>
+      if (window.opener) {
+        window.opener.location.replace("<%= escape_javascript root_url -%>");
+        window.close();
+      }
+
+    </script>
+  </body>
+</html>
