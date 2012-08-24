@@ -12,7 +12,8 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
 
-  <%= javascript_include_tag "application", controller_name unless MapEverything::Application.assets.find_asset("#{controller_name}.js").nil?  %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag controller_name unless MapEverything::Application.assets.find_asset("#{controller_name}.js").nil?  %>
 
   <%= yield :head %>
 
