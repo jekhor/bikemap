@@ -253,7 +253,7 @@ init_map = function() {
 
   map = new L.Map('map');
   theMap = map;
-  osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: '© участники <a href="http://openstreetmap.org/">OpenStreetMap</a>'});
+  osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: 'Карта: © участники <a href="http://openstreetmap.org/">OpenStreetMap</a>'});
 
   featureLayer = new L.CustomMap();
   theCustomMap = featureLayer;
@@ -269,7 +269,7 @@ init_map = function() {
 
   var attrib = new L.Control.Attribution({
     position: 'bottomleft',
-    prefix: '<a href="http://velogrodno.by/">velogrodno.by</a>'
+    prefix: '© <a href="http://velogrodno.by/">velogrodno.by</a>'
   });
 
   map.addControl(attrib);
