@@ -9,8 +9,9 @@ atom_feed :language => 'ru-RU' do |feed|
       entry.url  map_url + "?feature=#{item.id}"
       entry.title item.description
       content = "<p><strong>Тип:</strong> #{item.existing ? "Существующая" : "Желаемая"}</p>"
-      content += "<p><strong>Адрес:</strong> #{item.description}</p>"
-      content += "<p><strong>Ёмкость:</strong> #{item.capacity}</p>"
+      content += "<p><strong>Название места:</strong> #{item.description}</p>"
+      content += "<p><strong>Адрес:</strong> #{item.address}</p>"
+#      content += "<p><strong>Ёмкость:</strong> #{item.capacity}</p>"
       content += "<p><strong>Комментарий:</strong> #{item.comment}</p>"
       entry.content content, :type => 'html'
 

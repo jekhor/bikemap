@@ -6,7 +6,7 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many :users_liked, :join_table => :features_users_likes, :class_name => 'User'
 
   attr_accessible :geometry, :name, :description, :capacity, :comment
-  attr_accessible :photo, :existing, :approved
+  attr_accessible :photo, :existing, :approved, :address
 
   has_attached_file :photo,
     :styles => {:large => "800x600",
@@ -24,7 +24,8 @@ class Feature < ActiveRecord::Base
     geometry 'Координаты'
     existing 'Тип' do |existing| existing ? 'Существующая' : 'Желаемая' end
     rating 'Рейтинг'
-    description 'Адрес или название места'
+    description 'Название места'
+    address 'Адрес'
     comment 'Комментарий'
     capacity 'Ёмкость'
     approved 'Одобрено?' do |approved| approved ? 'Да' : 'Нет' end

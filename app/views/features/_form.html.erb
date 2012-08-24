@@ -15,8 +15,12 @@
     <%= f.radio_button :existing, true %><%= f.label :existing, 'Существующая', :value => true %>
   </div>
   <div class="field mandatory">
-    <%= f.label :description, 'Адрес или название места:' %><br/>
+    <%= f.label :description, 'Название места:' %><br/>
     <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :address, 'Адрес:' %><br/>
+    <%= f.text_field :address %>
   </div>
     <% unless @feature.photo_file_name.nil? %>
   <div class="field">

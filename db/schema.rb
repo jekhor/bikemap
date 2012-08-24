@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120804150632) do
+ActiveRecord::Schema.define(:version => 20120824130450) do
 
   create_table "comments", :force => true do |t|
     t.text     "text",      :null => false
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20120804150632) do
     t.boolean  "existing",                                                                          :default => false
     t.boolean  "approved",                                                                          :default => false
     t.integer  "user_id"
+    t.string   "address"
   end
 
   create_table "features_users_likes", :id => false, :force => true do |t|

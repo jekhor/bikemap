@@ -2,22 +2,29 @@
   <div id="feature-popup-nav"><a id="edit-link">Редактировать</a></div>
 <% end %>
 
-<div>
-  <%= @feature.description %>
-</div>
-<div>
+<p><%= @feature.description %></p>
+<% unless @feature.address.blank? %>
+  <p><%= @feature.address %></p>
+<% end %>
+
+<% unless @feature.photo_file_name.nil? %> 
+  <p>
   <%= link_to image_tag(@feature.photo.url(:thumb)), @feature.photo.url(:large), :rel => "lightbox", :title => @feature.description  unless @feature.photo_file_name.nil? %>
-</div>
+  </p>
+<% end %>
+
 <!--<div>
   <strong>Ёмкость:</strong>
   <%= @feature.capacity %>
 </div>-->
-<div>
+<% unless @feature.comment.blank? %>
+  <p>
   <%= @feature.comment %>
-</div>
-<div>
+  </p>
+<% end %>
+<p>
   <strong><%= @feature.user.name %></strong> <%= @feature.created_at.strftime('%d.%m.%Y') %>
-</div>
+</p>
 
 
 

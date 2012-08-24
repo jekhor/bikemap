@@ -7,6 +7,7 @@
     <th>Фото</th>
     <th>Тип</th>
     <th>Рейтинг</th>
+    <th>Название места</th>
     <th>Адрес</th>
     <th>Ёмкость</th>
     <th>Комментарий</th>
@@ -22,6 +23,7 @@
     <td><%= feature.existing ? 'Существующая' : 'Желаемая' %></td>
     <td><%= feature.rating %></td>
     <td><%= link_to feature.description, map_url + "?feature=#{feature.id}" %></td>
+    <td><%= link_to feature.address, map_url + "?feature=#{feature.id}" unless feature.address.blank? %></td>
     <td><%= feature.capacity %></td>
     <td><%= feature.comment %></td>
     <td><%= feature.approved ? 'Да' : 'Нет' %></td>

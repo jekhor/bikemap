@@ -2,7 +2,8 @@ ru:
   activerecord:
     attributes:
       feature:
-        description: "Адрес"
+        description: "Название места"
+        address: "Адрес"
     errors:
       models:
         feature:
