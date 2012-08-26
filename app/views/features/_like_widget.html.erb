@@ -1,11 +1,11 @@
 <h5>Рейтинг:</h5>
 <% if @feature.approved? %>
   <% unless current_user.nil? %>
-    <a href="#" rel="nofollow" id="feature-popup-dislike" class="feature-rating"><%= image_tag 'minus-24px.png' -%></a>
+    <a href="#" rel="nofollow" id="feature-popup-dislike" class="feature-rating"><%= image_tag get_likebutton_img('dislike', @feature.liked_by?(current_user)) -%></a>
   <% end %>
   <span id="feature-popup-rating" class="feature-rating"><%= @feature.rating -%></span>
   <% unless current_user.nil? %>
-    <a href="#" rel="nofollow" id="feature-popup-like" class="feature-rating"><%= image_tag 'plus-24px.png' -%></a>
+    <a href="#" rel="nofollow" id="feature-popup-like" class="feature-rating"><%= image_tag get_likebutton_img('like', !@feature.liked_by?(current_user)) -%></a>
   <% end %>
 <% else %>
   Точка станет доступной для голосования после проверки модератором.

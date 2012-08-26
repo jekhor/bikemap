@@ -72,4 +72,8 @@ class Feature < ActiveRecord::Base
     end
   end
 
+  def liked_by?(user)
+    self.users_liked.include? user
+  end
+
 end
