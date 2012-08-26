@@ -73,9 +73,7 @@ L.CustomMap =  L.GeoJSON.extend({
   _initMarker: function(m) {
     m.options.draggable = customMap._markerShouldBeDraggable(m);
 
-    if (m.options.draggable)
-      m.on("dragend", customMap.featureDragend, customMap);
-
+    m.on("dragend", customMap.featureDragend, customMap);
     m.on("click", customMap.featureClick, customMap); 
   },
 
