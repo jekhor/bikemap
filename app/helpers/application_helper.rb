@@ -12,6 +12,10 @@ module ApplicationHelper
     raw output
   end
 
+  def admin_logged_in?
+    user_signed_in? && current_user.admin?
+  end
+
   PROVIDERS_HASH = {
     'facebook' => 'Facebook',
     'vkontakte' => 'ВКонтакте',

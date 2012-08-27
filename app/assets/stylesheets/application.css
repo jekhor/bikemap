@@ -92,7 +92,10 @@ ul.comments-list {
 .comment-author-datetime {
   float: left;
   color: 818181;
-//  font-size: 0.8em;
+}
+
+.by-admin {
+  color: #AE3232;
 }
 
 .comment-text {

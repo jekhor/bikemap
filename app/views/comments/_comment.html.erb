@@ -1,6 +1,8 @@
 <li class="comment" id="comment_<%= comment.id -%>">
 <div class="comment-header">
-  <div class="comment-author-datetime"><strong><%= comment.user.name %>:</strong><br/> <%= comment.posted_on.strftime("%d.%m.%Y %H:%M") %></div>
+  <div class="comment-author-datetime<%= ' by-admin' if comment.user.admin? -%>">
+    <strong><%= comment.user.name %><%= ' (модератор)' if comment.user.admin? -%>:</strong><br/>
+    <%= comment.posted_on.strftime("%d.%m.%Y %H:%M") %></div>
   <div class="comment-actions">
     <%= link_to 'Править', edit_comment_path(comment), :remote => true if user_signed_in? and current_user.admin? %>
     <%= link_to 'Удалить', comment, :method => :delete, :remote => true, :confirm => 'Вы действительно хотите удалить комментарий?' if user_signed_in? and current_user.admin? %>
