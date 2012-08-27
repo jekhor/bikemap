@@ -199,7 +199,8 @@ class FeaturesController < ApplicationController
   end
 
   def map
-    @top_features = Feature.where(:approved => true).order('created_at DESC').limit(15)
+    @existing_features = Feature.where(:approved => true).where(:existing => true).order('created_at DESC')
+    @desired_features = Feature.where(:approved => true).where(:existing => false).order('created_at DESC')
     @not_approved_features = Feature.where(:approved => false)
     @latest_comments = Comment.page(params[:comments_page]).order('posted_on DESC')
     render

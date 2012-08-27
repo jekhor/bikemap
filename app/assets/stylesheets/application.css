@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require jquery.lightbox-0.5
+ *= require jquery.ui.all
 */
 
 body {
@@ -165,4 +166,19 @@ p.comment-text {
 
 #center {
   padding-bottom: 20px;
+}
+
+ul.tabs-nav {
+  margin-right: 0;
+  margin-bottom: 0.3em;
+}
+
+ul.tabs-nav li {
+  list-style: none outside none;
+  display: inline-block;
+  margin-right: 0.3em;
+}
+
+ul.tabs-nav li a.active {
+  font-weight: bold;
 }

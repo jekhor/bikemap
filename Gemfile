@@ -22,6 +22,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'jquery-tmpl-rails'
 
 # To use ActiveModel has_secure_password
@@ -56,4 +57,3 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-mailru'
 gem 'will_paginate'
 gem 'comma'
-

@@ -12,9 +12,18 @@
 <div id="map" style="height: 400px; width: 100%;" /></div>
 
 <% content_for :left do %>
+  <div class="custom-block">
+    <h3>Парковки</h3>
+  <ul class="tabs-nav">
+    <li><a href="#tab-existing">Существующие</a></li>
+    <li><a href="#tab-desired">Желаемые</a></li>
+    <% if admin_logged_in? %>
+      <li><a href="#tab-nonapproved">На модерацию</a></li>
+    <% end %>
+  </ul>
+
   <% if !current_user.nil? and current_user.admin? %>
-    <div class="top-features custom-block">
-      <h3>На модерацию</h3>
+    <div class="tabs-panel top-features" id="tab-nonapproved">
       <ul>
         <% @not_approved_features.each do |feature| %>
           <li class="feature">
@@ -26,21 +35,34 @@
         <% end %>
       </ul>
     </div>
-
   <% end %>
-  <div class="top-features custom-block">
-    <h3>Последние 15</h3>
+
+  <div class="tabs-panel top-features" id="tab-existing">
     <ul>
-      <% @top_features.each do |feature| %>
+      <% @existing_features.each do |feature| %>
         <li class="feature">
         <a href="#" class="feature-top-item" id="feature_top_item_<%= feature.id -%>">
-          <div class="feature-list-icon leaflet-div-icon-<%= feature.existing? ? 'existing' : 'desired' -%> <%= 'feature-notapproved' unless feature.approved? %>"><strong><%= feature.rating %></strong></div>
+          <div class="feature-list-icon leaflet-div-icon-existing <%= 'feature-notapproved' unless feature.approved? %>"><strong><%= feature.rating %></strong></div>
           <%= feature.description %>
         </a>
         </li>
       <% end %>
     </ul>
   </div>
+
+  <div class="tabs-panel top-features" id="tab-desired">
+    <ul>
+      <% @desired_features.each do |feature| %>
+        <li class="feature">
+        <a href="#" class="feature-top-item" id="feature_top_item_<%= feature.id -%>">
+          <div class="feature-list-icon leaflet-div-icon-desired <%= 'feature-notapproved' unless feature.approved? %>"><strong><%= feature.rating %></strong></div>
+          <%= feature.description %>
+        </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 <% end %>
 
 
