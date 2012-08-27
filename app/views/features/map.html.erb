@@ -50,11 +50,12 @@
     <div class="comment-post-container">
       <%= link_to 'Комментировать', new_comment_path, :remote => true if user_signed_in? %>
     </div>
+    <%= will_paginate @latest_comments, :param_name => :comments_page %>
     <ul class="comments-list">
-      <%= will_paginate @latest_comments, :param_name => :comments_page %>
       <% @latest_comments.each do |comment| %>
         <%= render :file => 'comments/_comment', :locals => { :comment => comment } %>
       <% end %>
+    </ul>
       <%= will_paginate @latest_comments, :param_name => :comments_page %>
   </div>
 <% end %>
