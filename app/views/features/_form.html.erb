@@ -29,7 +29,7 @@
       <%= label_tag 'remove_photo', 'Удалить фото' %>
   </div>
   <% end %>
-  <div class="field hidden" id="photo">
+  <div class="field<%= " hidden" unless @feature.existing? -%>" id="photo">
     <%= f.label :photo, 'Загрузить фото:' %><br/>
     <%= f.file_field :photo %>
   </div>
