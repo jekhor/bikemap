@@ -8,7 +8,7 @@
     <th><%= sortable 'address', 'Адрес' %></th>
     <th><%= sortable 'rating', 'Рейтинг' %></th>
     <th><%= sortable 'comment', 'Комментарий' %></th>
-    <th></th>
+    <th>Ссылка</th>
   </tr>
 
   <% i = 1 %>
@@ -19,8 +19,8 @@
     <% if show_photo %>
       <td><%= link_to image_tag(feature.photo.url(:thumb)), feature.photo.url(:large), :rel => "lightbox", :title => feature.description  unless feature.photo_file_name.nil? %></td>
     <% end %>
-    <td><%= link_to feature.description, map_url + "?feature=#{feature.id}" %></td>
-    <td><%= link_to feature.address, map_url + "?feature=#{feature.id}" unless feature.address.blank? %></td>
+    <td><%=feature.description %></td>
+    <td><%=feature.address unless feature.address.blank? %></td>
     <td><%= feature.rating %></td>
     <td><%= feature.comment %></td>
     <td><%= link_to '→', map_url + "?feature=#{feature.id}", :title => 'Карта' %></td>

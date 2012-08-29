@@ -19,7 +19,7 @@ body {
 }
 
 tbody tr:nth-child(even) td, tbody tr.even td {
-  background: #f4dede;
+  background: #fcf5f5;
 }
 
 a {
