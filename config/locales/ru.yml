@@ -11,7 +11,7 @@ ru:
             description:
               blank: "не может быть пустым"
   will_paginate:
-    previous_label: "&#8592; Предыдущие"
-    next_label: "Следующие &#8594;"
+    previous_label: "&#8592;"
+    next_label: "&#8594;"
     page_gap: "&hellip;"
 
