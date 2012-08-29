@@ -10,4 +10,11 @@ module FeaturesHelper
     img += '-24px.png'
     img
   end
+
+  def link_to_sort(text, options)
+    sort = options[:sort]
+    options[:sort] = sort + ' DESC' if @sorted_by == sort
+    
+    raw link_to text, options
+  end
 end

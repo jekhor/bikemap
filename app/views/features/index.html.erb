@@ -1,38 +1,17 @@
-<h1>Список велопарковок</h1>
+<h2>Список велопарковок</h2>
 
-<%= link_to 'Скачать как CSV', features_path(:format => 'csv') %>
-<table>
-  <tr>
-    <th>№</th>
-    <th>Фото</th>
-    <th>Тип</th>
-    <th>Рейтинг</th>
-    <th>Название места</th>
-    <th>Адрес</th>
-    <th>Ёмкость</th>
-    <th>Комментарий</th>
-    <th>Одобрено?</th>
-    <th></th>
-  </tr>
 
-  <% i = 1 %>
-<% @features.each do |feature| %>
-  <tr>
-    <td><%= i %></td>
-    <td><%= link_to image_tag(feature.photo.url(:thumb)), feature.photo.url(:large), :rel => "lightbox", :title => feature.description  unless feature.photo_file_name.nil? %></td>
-    <td><%= feature.existing ? 'Существующая' : 'Желаемая' %></td>
-    <td><%= feature.rating %></td>
-    <td><%= link_to feature.description, map_url + "?feature=#{feature.id}" %></td>
-    <td><%= link_to feature.address, map_url + "?feature=#{feature.id}" unless feature.address.blank? %></td>
-    <td><%= feature.capacity %></td>
-    <td><%= feature.comment %></td>
-    <td><%= feature.approved ? 'Да' : 'Нет' %></td>
-    <td>
-    <%= link_to 'Удалить', feature, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-  <% i += 1 %>
-<% end %>
-</table>
+<ul class="tabs-nav">
+  <li><a href="#tab-existing">Существующие</a></li>
+  <li><a href="#tab-desired">Желаемые</a></li>
+</ul>
 
-<br />
+<div class="tabs-panel" id="tab-existing">
+  <%= render :partial => 'features-list', :locals => { :features => @features_existing, :show_photo => true } %>
+</div>
 
+<div class="tabs-panel" id="tab-desired">
+  <%= render :partial => 'features-list', :locals => { :features => @features_desired, :show_photo => false  } %>
+</div>
+
+<%= link_to 'Скачать как CSV', features_path(:format => 'csv') if admin_logged_in? %>

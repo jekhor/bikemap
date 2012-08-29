@@ -24,10 +24,15 @@ class FeaturesController < ApplicationController
         @features = Feature.where('approved = ? OR user_id = ?', true, current_user.id)
       end
     end
-    @features = @features.order('rating DESC')
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html {
+        params[:sort] ||= 'rating DESC'
+        @sorted_by = params[:sort]
+        @features_existing = @features.where(:existing => true).order(params[:sort])
+        @features_desired = @features.where(:existing => false).order(params[:sort])
+      } # index.html.erb
+
       format.json {
         feature_collection = {:type => 'FeatureCollection', :features => @features}
         render json: feature_collection

@@ -28,12 +28,10 @@
     <div id="header" class="span-24 last">
       <nav id="secondary">
       <ul>
-      <% if user_signed_in? and current_user.admin? %>
         <li><%= link_to "Список парковок", features_path %></li>
       </ul>
-      <% end %>
-
       </nav>
+
     <nav id="main">
       <ul>
         <% unless action_name == "map" %>

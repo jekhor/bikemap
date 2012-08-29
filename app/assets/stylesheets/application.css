@@ -18,6 +18,10 @@ body {
   font-size: 12px;
 }
 
+tbody tr:nth-child(even) td, tbody tr.even td {
+  background: #f4dede;
+}
+
 a {
   color: #AE3232;
 }
