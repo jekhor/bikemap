@@ -3,6 +3,7 @@
 class FeaturesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show, :map, :feed]
   helper_method :have_edit_permissions?
+  helper_method :sort_column, :sort_direction, :show_existing
 
   private
   def have_edit_permissions?(feature)
@@ -27,10 +28,10 @@ class FeaturesController < ApplicationController
 
     respond_to do |format|
       format.html {
-        params[:sort] ||= 'rating DESC'
-        @sorted_by = params[:sort]
-        @features_existing = @features.where(:existing => true).order(params[:sort])
-        @features_desired = @features.where(:existing => false).order(params[:sort])
+        params[:sort] ||= 'rating'
+        params[:direction] ||= 'desc'
+        @features = @features.where(:existing => show_existing)
+        @features = @features.order(sort_column + ' ' + sort_direction)
       } # index.html.erb
 
       format.json {
@@ -209,6 +210,20 @@ class FeaturesController < ApplicationController
     @not_approved_features = Feature.where(:approved => false)
     @latest_comments = Comment.page(params[:comments_page]).order('posted_on DESC')
     render
+  end
+
+  private
+
+  def sort_column
+    Feature.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def show_existing
+    (params[:existing] == 'false') ? false : true
   end
 
 end

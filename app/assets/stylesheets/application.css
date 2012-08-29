@@ -172,17 +172,17 @@ p.comment-text {
   padding-bottom: 20px;
 }
 
-ul.tabs-nav {
+ul.tabs-nav, ul.nav {
   margin-right: 0;
   margin-bottom: 0.3em;
 }
 
-ul.tabs-nav li {
+ul.tabs-nav li, ul.nav li {
   list-style: none outside none;
   display: inline-block;
   margin-right: 0.3em;
 }
 
-ul.tabs-nav li a.active {
+ul.tabs-nav li a.active, ul.nav li a.active {
   font-weight: bold;
 }

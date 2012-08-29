@@ -4,10 +4,11 @@
     <% if show_photo %>
       <th>Фото</th>
     <% end %>
-    <th><%= link_to_sort 'Название места', :sort => 'description' %></th>
-    <th><%= link_to_sort 'Адрес', :sort => 'address' %></th>
-    <th><%= link_to_sort 'Рейтинг', :sort => 'rating' %></th>
-    <th><%= link_to_sort 'Комментарий', :sort => 'comment' %></th>
+    <th><%= sortable 'description', 'Название места' %></th>
+    <th><%= sortable 'address', 'Адрес' %></th>
+    <th><%= sortable 'rating', 'Рейтинг' %></th>
+    <th><%= sortable 'comment', 'Комментарий' %></th>
+    <th></th>
   </tr>
 
   <% i = 1 %>
@@ -22,6 +23,7 @@
     <td><%= link_to feature.address, map_url + "?feature=#{feature.id}" unless feature.address.blank? %></td>
     <td><%= feature.rating %></td>
     <td><%= feature.comment %></td>
+    <td><%= link_to '→', map_url + "?feature=#{feature.id}", :title => 'Карта' %></td>
   </tr>
   <% i += 1 %>
 <% end %>

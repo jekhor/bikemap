@@ -11,10 +11,14 @@ module FeaturesHelper
     img
   end
 
-  def link_to_sort(text, options)
-    sort = options[:sort]
-    options[:sort] = sort + ' DESC' if @sorted_by == sort
-    
-    raw link_to text, options
+  def sortable(column, title = nil)
+    css_class = column == sort_column ? "current #{sort_direction}" : nil
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    link_to title, {:sort => column, :direction => direction, :existing => show_existing }, {:class => css_class}
+  end
+
+  def link_to_existing(title, existing)
+    css_class = (existing == show_existing) ? 'active' : nil
+    link_to title, {:sort => sort_column, :direction => sort_direction, :existing => existing}, {:class => css_class}
   end
 end

@@ -1,17 +1,11 @@
 <h2>Список велопарковок</h2>
 
 
-<ul class="tabs-nav">
-  <li><a href="#tab-existing">Существующие</a></li>
-  <li><a href="#tab-desired">Желаемые</a></li>
+<ul class="nav">
+  <li><%= link_to_existing 'Существующие', true %></li>
+  <li><%= link_to_existing 'Желаемые', false %></li>
 </ul>
 
-<div class="tabs-panel" id="tab-existing">
-  <%= render :partial => 'features-list', :locals => { :features => @features_existing, :show_photo => true } %>
-</div>
-
-<div class="tabs-panel" id="tab-desired">
-  <%= render :partial => 'features-list', :locals => { :features => @features_desired, :show_photo => false  } %>
-</div>
+<%= render :partial => 'features-list', :locals => { :features => @features, :show_photo => show_existing } %>
 
 <%= link_to 'Скачать как CSV', features_path(:format => 'csv') if admin_logged_in? %>
