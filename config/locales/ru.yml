@@ -1,4 +1,7 @@
 ru:
+  features:
+    features-list:
+      original_img_size: "Исходный размер"
   activerecord:
     attributes:
       feature:

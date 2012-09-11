@@ -17,7 +17,8 @@
   <tr>
     <td><%= i %></td>
     <% if show_photo %>
-      <td><%= link_to image_tag(feature.photo.url(:thumb)), feature.photo.url(:large), :rel => "lightbox", :title => feature.description  unless feature.photo_file_name.nil? %></td>
+      <td><%= link_to image_tag(feature.photo.url(:thumb)), feature.photo.url(:large), :rel => "lightbox", :title => feature.description  unless feature.photo_file_name.nil? %><br/>
+        <%= link_to t('.original_img_size'), feature.photo.url unless feature.photo_file_name.nil? %></td>
     <% end %>
     <td><%=feature.description %></td>
     <td><%=feature.address unless feature.address.blank? %></td>
