@@ -215,11 +215,11 @@ class FeaturesController < ApplicationController
   private
 
   def sort_column
-    Feature.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    Feature.column_names.include?(params[:sort]) ? params[:sort] : "rating"
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   def show_existing
