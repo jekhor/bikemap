@@ -6,7 +6,7 @@
 <% end %>
 
 <% unless current_user.nil? %>
-  <%= tag 'div', id: 'current-user', data: {uid: current_user.id, admin: current_user.admin?, name: current_user.name}, :open => true %></div>
+  <%= tag 'div', { id: 'current-user', data: {uid: current_user.id, admin: current_user.admin?, name: current_user.name} }, true %></div>
 <% end %>
 
 <div id="map" style="height: 400px; width: 100%;" /></div>
