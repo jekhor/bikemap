@@ -7,4 +7,26 @@
 
 License: GPL3 с ограничением: если вы создаёте сервис на базе этого движка без изменений, либо с незначительными изменениями, оставьте где-либо в коде главной страницы индексируемую ссылку на http://velogrodno.by/.
 
+Требования:
+Веб-сервер с поддержкой Ruby on Rails
+База данных с поддержкой ГИС-расширения (Postgresql + PostGIS, Mysql + Spatial Extension, SQLite + Spatialite).
+Протестирована работа с PostGIS, для работы с другими БД требуется добавить нужный gem в Gemfile и изменить конфигурацию.
+
+Установка:
+
+Установка и настройка веб-сервера с поддержкой Ruby on Rails опущена, поскольку зависит от конкретного хостинга.
+
+Перейти в каталог с исходными текстами.
+
+Установить все требуемые gem-пакеты:
+$ bundle install
+
+Сконфигурировать параметры доступа к базе данных в config/database.yml. Подробное описание --- в руководстве по Ruby on Rails и на страницах адаптеров:
+https://github.com/dazuma/activerecord-postgis-adapter
+https://github.com/dazuma/activerecord-mysql2spatial-adapter
+https://github.com/dazuma/activerecord-spatialite-adapter
+
+Получить ключи к API сервисов, через которые будет происходить вход, и записать их в config/initializers/devise.rb. Также в этом же файле прописать правильный адрес отправителя для почтовых сообщений при регистрации пользователей (параметры config.mailer_sender, config.omniauth).
+
+
 Разработчик: Yauhen Kharuzhy <jekhor@gmail.com>.
