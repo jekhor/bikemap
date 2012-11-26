@@ -28,5 +28,8 @@ https://github.com/dazuma/activerecord-spatialite-adapter
 
 Получить ключи к API сервисов, через которые будет происходить вход, и записать их в config/initializers/devise.rb. Также в этом же файле прописать правильный адрес отправителя для почтовых сообщений при регистрации пользователей (параметры config.mailer_sender, config.omniauth).
 
+Создать базу и прекомпилировать файлы стилей и скрипты:
+$ bundle exec rake db:setup RAILS_ENV=production
+$ bundle exec rake assets:precompile RAILS_ENV=production
 
 Разработчик: Yauhen Kharuzhy <jekhor@gmail.com>.
