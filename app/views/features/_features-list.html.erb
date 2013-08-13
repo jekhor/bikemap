@@ -27,7 +27,11 @@
     <td><%= feature.rating %></td>
     <td><%= feature.comment %></td>
     <td><%= feature.created_at.to_date %></td>
-    <td><%= feature.user.name %></td>
+    <% if user_signed_in? and current_user.admin? then -%>
+      <td><%= link_to feature.user.name, user_path(feature.user) %></td>
+    <% else %>
+      <td><%= feature.user.name %></td>
+    <% end %>
     <td><%= link_to '→', map_url + "?feature=#{feature.id}", :title => 'Карта' %></td>
   </tr>
   <% i += 1 %>
