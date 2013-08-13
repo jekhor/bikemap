@@ -56,12 +56,22 @@ L.CustomMap =  L.GeoJSON.extend({
     map.on("popupclose", customMap.onPopupClose);
     map.on("zoomend", customMap.onMapZoomEnd);
 
+    L.DomEvent.on(document, 'keypress', this._onKeypress, this);
+
     L.GeoJSON.prototype.onAdd.call(this, map);
   },
 
 
   onRemove: function(map) {
+    L.DomEvent.off(document, 'keypress', this._onKeypress, this);
     L.GeoJSON.prototype.onRemove.call(this, map);
+  },
+
+  _onKeypress: function(e) {
+    var key = e.keyCode;
+
+    if (key = 27) // ESC
+      this._map.closePopup();
   },
 
   _markerShouldBeDraggable: function(m) {
