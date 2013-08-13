@@ -37,6 +37,8 @@ L.CustomMap =  L.GeoJSON.extend({
       var iconClass = properties.existing ? 'leaflet-div-icon-existing' : 'leaflet-div-icon-desired';
       if (!properties.approved) {
         iconClass += ' feature-notapproved';
+      } else {
+        iconClass += ' feature-approved';
       }
    
       var icon = new L.DivIcon({
