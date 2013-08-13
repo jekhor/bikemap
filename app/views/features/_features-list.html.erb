@@ -8,6 +8,8 @@
     <th><%= sortable 'address', 'Адрес' %></th>
     <th><%= sortable 'rating', 'Рейтинг' %></th>
     <th><%= sortable 'comment', 'Комментарий' %></th>
+    <th><%= sortable 'created_at', 'Дата добавления' %></th>
+    <th><%= sortable 'user_id', 'Автор' %></th>
     <th>Ссылка</th>
   </tr>
 
@@ -24,6 +26,8 @@
     <td><%=feature.address unless feature.address.blank? %></td>
     <td><%= feature.rating %></td>
     <td><%= feature.comment %></td>
+    <td><%= feature.created_at.to_date %></td>
+    <td><%= feature.user.name %></td>
     <td><%= link_to '→', map_url + "?feature=#{feature.id}", :title => 'Карта' %></td>
   </tr>
   <% i += 1 %>
