@@ -70,7 +70,7 @@ L.CustomMap =  L.GeoJSON.extend({
   _onKeypress: function(e) {
     var key = e.keyCode;
 
-    if (key = 27) // ESC
+    if (key == 27) // ESC
       this._map.closePopup();
   },
 
