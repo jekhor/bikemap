@@ -29,6 +29,8 @@ class Feature < ActiveRecord::Base
     comment 'Комментарий'
     capacity 'Ёмкость'
     approved 'Одобрено?' do |approved| approved ? 'Да' : 'Нет' end
+    created_at 'Дата создания'
+    user 'Пользователь' do |user| user.name end
   end
 
 
