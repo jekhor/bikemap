@@ -270,10 +270,9 @@ init_map = function() {
 
   L.Icon.Default.imagePath = '/assets';
 
-//  minsk = new L.LatLng(53.901, 27.5545);
-//  map.setView(minsk, 12);
-  hrodna = new L.LatLng(53.6751, 23.8275);
-  map.setView(hrodna, 12);
+  var center = new L.LatLng($('#map').data('center-lat'), $('#map').data('center-lon'));
+  var zoom = $('#map').data('zoom');
+  map.setView(center, zoom);
   map.addLayer(osm);
   map.addLayer(featureLayer);
 
