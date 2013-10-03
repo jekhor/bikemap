@@ -10,10 +10,6 @@
 
 <%= form_for @feature, :remote => true do |f| %>
   <%= f.hidden_field :geometry unless @feature.geometry.nil? %>
-  <div class="field">
-    <%= f.radio_button :existing, false %><%= f.label :existing, 'Желаемая', :value => false %>
-    <%= f.radio_button :existing, true %><%= f.label :existing, 'Существующая', :value => true %>
-  </div>
   <div class="field mandatory">
     <%= f.label :description, 'Название места:' %><br/>
     <%= f.text_field :description %>
@@ -43,11 +39,13 @@
     <%= f.label :comment, 'Комментарий:' %><br/>
     <%= f.text_field :comment %>
   </div>
+  <!--
   <% if !current_user.nil? and current_user.admin? %>
     <div class="field">
       <%= f.check_box :approved %>
       <%= f.label :approved, 'Одобрено' %>
     </div>
+    -->
   <% end %>
   <div class="submit">
     <%= f.submit 'Сохранить' %>

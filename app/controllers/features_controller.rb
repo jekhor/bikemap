@@ -44,10 +44,10 @@ class FeaturesController < ApplicationController
 
   def feed
     if params[:show_unapproved]
-      @title = "Карта велопарковок — для модераторов"
+      @title = "Карта велоточек — для модераторов"
       @features = Feature.order('created_at DESC')
     else
-      @title = "Карта велопарковок — последние"
+      @title = "Карта велоточек — последние"
       @features = Feature.where(:approved => true).order('created_at DESC')
     end
 
@@ -63,7 +63,7 @@ class FeaturesController < ApplicationController
   # GET /features/1.json
   def show
     @feature = Feature.find(params[:id])
-    @title = @feature.existing? ? "Велопарковка" : "Здесь нужна велопарковка!"
+    @title = @feature.existing? ? "Место" : "Здесь нужна станция проката!"
     @liked = @feature.users_liked.include? current_user if user_signed_in?
 
     respond_to do |format|
@@ -82,8 +82,9 @@ class FeaturesController < ApplicationController
     @feature = Feature.new
     @feature.geometry = params[:geometry]
     @feature.user = current_user
+    @feature.approved = true
 
-    respond_to do |format|
+    respond_мест do |format|
       format.html {render :layout => 'feature-popup'}
       format.json { render json: @feature }
       format.js
@@ -205,9 +206,7 @@ class FeaturesController < ApplicationController
   end
 
   def map
-    @existing_features = Feature.where(:approved => true).where(:existing => true).order('created_at DESC')
-    @desired_features = Feature.where(:approved => true).where(:existing => false).order('created_at DESC')
-    @not_approved_features = Feature.where(:approved => false)
+    @features = Feature.find(:all)
     @latest_comments = Comment.page(params[:comments_page]).order('posted_on DESC')
     render
   end

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="786.625"
+   height="786.59375"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="bikesharing.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.175"
+     inkscape:cx="-1228.1123"
+     inkscape:cy="-154.13102"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     units="mm"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1678"
+     inkscape:window-height="1029"
+     inkscape:window-x="0"
+     inkscape:window-y="19"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3723"
+       units="mm"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="3.5013194mm"
+       originy="-64.881035mm" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Пласт 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(12.40625,-35.875)">
+    <g
+       id="g5327"
+       inkscape:export-xdpi="2.7460172"
+       inkscape:export-ydpi="2.7460172"
+       inkscape:export-filename="/home/jek/work/src/ruby/rails/MapEverything/app/assets/images/bikesharing.png">
+      <rect
+         ry="124.01575"
+         y="48.269833"
+         x="0"
+         height="761.81104"
+         width="761.81104"
+         id="rect5325"
+         style="color:#000000;fill:#f4f4f4;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:24.80315017999999938;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         inkscape:export-xdpi="2.7460172"
+         inkscape:export-ydpi="2.7460172" />
+      <g
+         id="g5317"
+         transform="matrix(1.7298074,0,0,1.7298074,-275.69098,33.555428)">
+        <circle
+           d="m 376,409 c 0,88.91784 -72.08216,161 -161,161 -88.91784,0 -161,-72.08216 -161,-161 0,-88.91784 72.08216,-161 161,-161 88.91784,0 161,72.08216 161,161 z"
+           sodipodi:ry="161"
+           sodipodi:rx="161"
+           sodipodi:cy="409"
+           sodipodi:cx="215"
+           id="circle5319"
+           style="fill:none;stroke:#000000;stroke-width:40px;stroke-opacity:1"
+           transform="matrix(0.404263,0,0,0.404263,177.6268,199.8607)"
+           r="161"
+           cy="409"
+           cx="215" />
+        <circle
+           d="m 951,406 c 0,88.91784 -72.08216,161 -161,161 -88.91784,0 -161,-72.08216 -161,-161 0,-88.91784 72.08216,-161 161,-161 88.91784,0 161,72.08216 161,161 z"
+           sodipodi:ry="161"
+           sodipodi:rx="161"
+           sodipodi:cy="406"
+           sodipodi:cx="790"
+           id="circle5321"
+           style="fill:none;stroke:#000000;stroke-width:40px;stroke-opacity:1"
+           transform="matrix(0.404263,0,0,0.404263,177.6268,199.8607)"
+           r="161"
+           cy="406"
+           cx="790" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path5323"
+           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-opacity:1"
+           d="m 351.25144,206.11348 c -53.59172,0.52234 -44.50307,-5.53676 -73.33604,87.12573 -23.48869,74.03725 -20.93021,65.96322 -21.05305,71.15653 -0.0861,4.03463 3.17077,7.23353 7.26337,7.50734 8.51119,-0.86058 4.93119,0.9205 34.43938,-90.71243 107.82185,113.74166 67.3698,95.29738 125.39558,97.60727 76.26112,-0.73127 82.45951,3.96976 83.3649,-7.20825 -0.10447,-3.79564 -1.88041,-6.0591 -54.21853,-122.54013 l 5.01443,-13.78968 17.2371,-0.3134 -0.6268,-14.41649 -64.24739,0 c -5.67605,7.7654 2.29829,7.73058 31.02679,14.10308 l -5.01443,14.10309 -128.18137,0.3134 c 8.63597,-30.15622 3.76082,-28.27581 42.62266,-28.20617 l 0.3134,-14.72989 z m -46.63991,58.39296 125.428,-0.22238 -36.24958,97.40685 -89.17842,-97.18447 z m 140.55052,5.78215 -35.58241,93.40383 77.83652,0.22239 -42.25411,-93.62622 z" />
+      </g>
+    </g>
+  </g>
+</svg>

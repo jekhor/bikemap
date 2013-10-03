@@ -15,7 +15,7 @@
 
 body {
   background-color: #f4f4f4;
-  font-size: 12px;
+//  font-size: 12px;
 }
 
 tbody tr:nth-child(even) td, tbody tr.even td {
@@ -32,8 +32,8 @@ a:focus, a:hover {
 
 h1, h2, h3, h4, h5 {
   color: #922A2A;
-  font-family: "Century Gothic","Times New Roman",Georgia,Times,Serif;
-  font-weight: normal;
+//  font-family: "Century Gothic","Times New Roman",Georgia,Times,Serif;
+//  font-weight: normal;
 }
 
 /* Navigation */

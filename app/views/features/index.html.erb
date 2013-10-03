@@ -1,9 +1,8 @@
-<h2>Список велопарковок</h2>
+<h2>Список мест</h2>
 
 
 <ul class="nav">
   <li><%= link_to_existing 'Существующие', true %></li>
-  <li><%= link_to_existing 'Желаемые', false %></li>
 </ul>
 
 <%= render :partial => 'features-list', :locals => { :features => @features, :show_photo => show_existing } %>

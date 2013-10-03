@@ -52,6 +52,15 @@ div.popup-loading {
 //  float: right;
 }
 
+.leaflet-div-icon-bikesharing {
+  background-image: url("marker-bikesharing-24px.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  text-align: right;
+  color: #222222;
+  border: none;
+}
+
 .leaflet-div-icon-existing {
   background-image: url("marker-bicycle-parking-24px.png");
   background-position: center center;
@@ -74,6 +83,13 @@ div.popup-loading {
   position: relative;
   top: 4px;
 }
+
+.leaflet-div-icon-bikesharing strong {
+  position: relative;
+  left: -7px;
+  top: -2px;
+}
+
 
 .top-features ul {
   padding-left: 5px;

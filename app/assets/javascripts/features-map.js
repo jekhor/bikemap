@@ -34,7 +34,8 @@ L.CustomMap =  L.GeoJSON.extend({
   },
 
   _createFeatureIcon: function(properties) {
-      var iconClass = properties.existing ? 'leaflet-div-icon-existing' : 'leaflet-div-icon-desired';
+//      var iconClass = properties.existing ? 'leaflet-div-icon-existing' : 'leaflet-div-icon-desired';
+      var iconClass = 'leaflet-div-icon-bikesharing';
       if (!properties.approved) {
         iconClass += ' feature-notapproved';
       } else {

@@ -9,54 +9,19 @@
   <%= tag 'div', { id: 'current-user', data: {uid: current_user.id, admin: current_user.admin?, name: current_user.name} }, true %></div>
 <% end %>
 
-<div id="map" style="height: 400px; width: 100%;" data-center-lat="<%= Rails.application.config.map_center_lat -%>" data-center-lon="<%= Rails.application.config.map_center_lon -%>" data-zoom="<%= Rails.application.config.map_zoom -%>" /></div>
+<div id="map" style="height: 600px; width: 100%;" data-center-lat="<%= Rails.application.config.map_center_lat -%>" data-center-lon="<%= Rails.application.config.map_center_lon -%>" data-zoom="<%= Rails.application.config.map_zoom -%>" /></div>
 
 
 <% content_for :left do %>
   <div class="custom-block">
-    <h3>Парковки</h3>
-  <ul class="tabs-nav">
-    <li><a href="#tab-existing">Существующие</a></li>
-    <li><a href="#tab-desired">Желаемые</a></li>
-    <% if admin_logged_in? %>
-      <li><a href="#tab-nonapproved">На модерацию</a></li>
-    <% end %>
-  </ul>
+    <h3>Места</h3>
 
-  <% if !current_user.nil? and current_user.admin? %>
-    <div class="tabs-panel top-features" id="tab-nonapproved">
-      <ul>
-        <% @not_approved_features.each do |feature| %>
-          <li class="feature">
-          <a href="#" class="feature-top-item" id="feature_top_item_<%= feature.id -%>">
-            <div class="feature-list-icon leaflet-div-icon-<%= feature.existing? ? 'existing' : 'desired' -%> <%= 'feature-notapproved' unless feature.approved? %>"><strong><%= feature.rating %></strong></div>
-            <%= feature.description %>
-          </a>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="tabs-panel top-features" id="tab-existing">
+  <div class="tabs-panel top-features" id="tab-all">
     <ul>
-      <% @existing_features.each do |feature| %>
+      <% @features.each do |feature| %>
         <li class="feature">
         <a href="#" class="feature-top-item" id="feature_top_item_<%= feature.id -%>">
-          <div class="feature-list-icon leaflet-div-icon-existing <%= 'feature-notapproved' unless feature.approved? %>"><strong><%= feature.rating %></strong></div>
-          <%= feature.description %>
-        </a>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-
-  <div class="tabs-panel top-features" id="tab-desired">
-    <ul>
-      <% @desired_features.each do |feature| %>
-        <li class="feature">
-        <a href="#" class="feature-top-item" id="feature_top_item_<%= feature.id -%>">
-          <div class="feature-list-icon leaflet-div-icon-desired <%= 'feature-notapproved' unless feature.approved? %>"><strong><%= feature.rating %></strong></div>
+          <div class="feature-list-icon leaflet-div-icon-bikesharing"><strong><%= feature.rating %></strong></div>
           <%= feature.description %>
         </a>
         </li>
