@@ -41,13 +41,18 @@ L.CustomMap =  L.GeoJSON.extend({
       } else {
         iconClass += ' feature-approved';
       }
-   
+  /* 
       var icon = new L.DivIcon({
         iconSize: new L.Point(24, 24),
         html: '<strong>' + properties.rating + '</strong>',
         className: iconClass
       });
-
+*/
+      var icon = new L.Icon({
+        iconUrl: '/assets/marker-blue-circle-16px.png',
+	iconSize: [16, 16],
+	iconAnchor: [8,8],
+      });
       return icon;
   },
 

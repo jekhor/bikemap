@@ -24,8 +24,8 @@
       <% @features.each do |feature| %>
         <li class="feature">
         <a href="#" class="feature-top-item" id="feature_top_item_<%= feature.id -%>">
-          <div class="feature-list-icon leaflet-div-icon-bikesharing"><strong><%= feature.rating %></strong></div>
-          <%= feature.description %>
+          <div class="feature-list-icon leaflet-div-icon-bikesharing"></div>
+          <strong><%= feature.rating %></strong> <%= feature.description %>
         </a>
         </li>
       <% end %>

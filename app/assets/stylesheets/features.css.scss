@@ -53,7 +53,7 @@ div.popup-loading {
 }
 
 .leaflet-div-icon-bikesharing {
-  background-image: url("marker-bikesharing-16px.png");
+  background-image: url("marker-blue-circle-16px.png");
   background-position: center center;
   background-repeat: no-repeat;
   text-align: right;
@@ -86,8 +86,8 @@ div.popup-loading {
 
 .leaflet-div-icon-bikesharing strong {
   position: relative;
-  left: -7px;
-  top: -2px;
+  left: 7px;
+  top: 2px;
 }
 
 
