@@ -84,7 +84,7 @@ class FeaturesController < ApplicationController
     @feature.user = current_user
     @feature.approved = true
 
-    respond_мест do |format|
+    respond_to do |format|
       format.html {render :layout => 'feature-popup'}
       format.json { render json: @feature }
       format.js
