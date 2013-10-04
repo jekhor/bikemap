@@ -63,7 +63,7 @@ class FeaturesController < ApplicationController
   # GET /features/1.json
   def show
     @feature = Feature.find(params[:id])
-    @title = @feature.existing? ? "Место" : "Здесь нужна станция проката!"
+    @title = @feature.existing? ? "Место" : "Cтанция проката"
     @liked = @feature.users_liked.include? current_user if user_signed_in?
 
     respond_to do |format|
