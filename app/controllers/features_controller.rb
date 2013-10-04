@@ -111,6 +111,7 @@ class FeaturesController < ApplicationController
       @feature = Feature.new(params[:feature])
     end
 
+    @feature.approved = true
     @feature.user = current_user
 
     respond_to do |format|
