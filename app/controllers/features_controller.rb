@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class FeaturesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show, :map, :feed]
+#  before_filter :authenticate_user!, :except => [:index, :show, :map, :feed]
   helper_method :have_edit_permissions?
   helper_method :sort_column, :sort_direction, :show_existing
 
@@ -30,7 +30,6 @@ class FeaturesController < ApplicationController
       format.html {
         params[:sort] ||= 'rating'
         params[:direction] ||= 'desc'
-        @features = @features.where(:existing => show_existing)
         @features = @features.order(sort_column + ' ' + sort_direction)
       } # index.html.erb
 

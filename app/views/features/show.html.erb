@@ -23,7 +23,7 @@
   </p>
 <% end %>
 <p>
-  <strong><%= @feature.user.name %></strong> <%= @feature.created_at.strftime('%d.%m.%Y') %>
+  <strong><%= @feature.user.nil? ? 'Аноним' : @feature.user.name %></strong> <%= @feature.created_at.strftime('%d.%m.%Y') %>
 </p>
 
 

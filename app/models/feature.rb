@@ -58,6 +58,7 @@ class Feature < ActiveRecord::Base
   end
 
   def toggle_like(user, vote)
+    return if user.nil?
     transaction do
       if self.users_liked.include? user
         if vote == 'dislike'

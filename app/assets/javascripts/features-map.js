@@ -58,7 +58,7 @@ L.CustomMap =  L.GeoJSON.extend({
 
   onAdd: function(map) {
     customMap._map = map;
-    if ($('#current-user').size() > 0)
+//    if ($('#current-user').size() > 0)
       map.on("click", customMap.onClick);
 
     map.on("popupclose", customMap.onPopupClose);

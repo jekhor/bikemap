@@ -1,10 +1,6 @@
 <h2>Список мест</h2>
 
 
-<ul class="nav">
-  <li><%= link_to_existing 'Существующие', true %></li>
-</ul>
-
-<%= render :partial => 'features-list', :locals => { :features => @features, :show_photo => show_existing } %>
+<%= render :partial => 'features-list', :locals => { :features => @features, :show_photo => true } %>
 
 <%= link_to 'Скачать как CSV', features_path(:format => 'csv') if admin_logged_in? %>
