@@ -35,6 +35,10 @@
   overflow: auto;
 }
 
+div.leaflet-bottom, div.leaflet-top {
+  z-index: 8;
+}
+
 div.popup-loading {
   background-image: url("ajax-loader.gif");
   background-position: center center;
