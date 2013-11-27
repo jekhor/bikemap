@@ -265,7 +265,8 @@ init_map = function() {
 
   map = new L.Map('map');
   theMap = map;
-  osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: 'Карта: © участники <a href="http://openstreetmap.org/">OpenStreetMap</a>'});
+  var osm_mapnik = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18, attribution: 'Карта: © участники <a href="http://openstreetmap.org/">OpenStreetMap</a>'});
+  var osm_mapquest = new L.TileLayer('http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {maxZoom: 18, attribution: 'Карта: © участники <a href="http://openstreetmap.org/">OpenStreetMap</a>, визуализация: <a href="http://http://www.mapquest.com/">MapQuest</a>'});
 
   featureLayer = new L.CustomMap();
   theCustomMap = featureLayer;
@@ -275,7 +276,7 @@ init_map = function() {
   var center = new L.LatLng($('#map').data('center-lat'), $('#map').data('center-lon'));
   var zoom = $('#map').data('zoom');
   map.setView(center, zoom);
-  map.addLayer(osm);
+  map.addLayer(osm_mapnik);
   map.addLayer(featureLayer);
 
   var attrib = new L.Control.Attribution({
@@ -284,6 +285,13 @@ init_map = function() {
   });
 
   map.addControl(attrib);
+
+  var baselayers = {
+    "OSM Standard": osm_mapnik,
+    "OSM MapQuest Open": osm_mapquest
+  };
+
+  L.control.layers(baselayers).addTo(map);
 
   $.getJSON('/features.json', function(data) {
     featureLayer.addData(data);
