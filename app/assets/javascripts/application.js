@@ -14,7 +14,7 @@
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require jquery.remotipart
-//= require jquery.lightbox-0.5.min
+//= require jquery.lightbox-0.5
 //= require jquery-tmpl
 
 function popupCenter(url, width, height, name) {
