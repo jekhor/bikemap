@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120824130450) do
+ActiveRecord::Schema.define(:version => 20140423160228) do
 
   create_table "comments", :force => true do |t|
     t.text     "text",      :null => false
@@ -36,12 +36,31 @@ ActiveRecord::Schema.define(:version => 20120824130450) do
     t.boolean  "approved",                                                                          :default => false
     t.integer  "user_id"
     t.string   "address"
+    t.integer  "realm_id"
   end
 
   create_table "features_users_likes", :id => false, :force => true do |t|
     t.integer "feature_id"
     t.integer "user_id"
   end
+
+  create_table "realms", :force => true do |t|
+    t.string  "name"
+    t.string  "base_url"
+    t.float   "map_center_lat"
+    t.float   "map_center_lon"
+    t.integer "map_zoom"
+  end
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
