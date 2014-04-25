@@ -14,6 +14,8 @@ class Feature < ActiveRecord::Base
       :thumb => "100x100"
     }
 
+  validates_attachment :photo, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png"] }
+
   validates :description, :presence => true
   validates :geometry, :presence => true
 
