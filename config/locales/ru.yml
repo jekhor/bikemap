@@ -1,5 +1,34 @@
 ru:
+  users:
+    admin_required: "Для этой операции необходимы привилегии администратора"
+    updated: "Учётная запись пользователя обновлена."
+  comments:
+    created: "Комментарий добавлен."
+    create_failed: "Ошибка при добавлении комментария."
+    updated: "Комментарий обновлён."
+    update_failed: "Ошибка при обновлении комментария."
+  feature:
+    coordinates: "Координаты"
+    type: "Тип"
+    existing: "Существующая"
+    needed: "Желаемая"
+    rating: "Рейтинг"
+    description: "Название места"
+    address: "Адрес"
+    comment: "Комментарий"
+    capacity: "Ёмкость"
+    approved: "Одобрено?"
+    created_at: "Дата создания"
+    user: "Пользователь"
   features:
+    new: "Создание новой точки"
+    new_subtitle: "Пожалуйста, заполните форму"
+    edit: "Редактирование точки"
+    created: "Точка добавлена."
+    updated: "Точка обновлена."
+    no_permissions: "Недостаточно прав для удаления объектов"
+    moderators_map: "Карта велопарковок — для модераторов"
+    latest_map: "Карта велопарковок — последние"
     features-list:
       original_img_size: "Исходный размер"
   activerecord:

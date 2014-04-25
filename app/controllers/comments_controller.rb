@@ -40,9 +40,9 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      flash[:notice] = "Комментарий отправлен."
+      flash[:notice] = t('comments.created')
     else
-      flash[:alert] = "Упс! С комментарием что-то не так..."
+      flash[:alert] = t('comment.create_failed')
     end
 
     respond_to do |format|
@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
         format.json { head :no_content }
         format.js
       else
-        flash[:alert] = "Упс! С комментарием что-то не так..."
+        flash[:alert] = t('comment.update_failed')
         format.json { render json: @comment.errors, status: :unprocessable_entity }
         format.js
       end
