@@ -279,12 +279,7 @@ init_map = function() {
   map.addLayer(osm_mapnik);
   map.addLayer(featureLayer);
 
-  var attrib = new L.Control.Attribution({
-    position: 'bottomleft',
-    prefix: '© <a href="http://velogrodno.by/">velogrodno.by</a>'
-  });
-
-  map.addControl(attrib);
+  map.attributionControl.setPrefix('© Разработка <a href="http://velogrodno.by/">velogrodno.by</a>');
 
   var baselayers = {
     "OSM Standard": osm_mapnik,
