@@ -9,6 +9,7 @@
   <%= tag 'div', { id: 'current-user', data: {uid: current_user.id, admin: current_user.admin?, name: current_user.name} }, true %></div>
 <% end %>
 
+<div> Для добавления точек войдите на сайт. Точки добавляются простым кликом по карте при максимальном приближении (клик на других масштабах приблизит карту до максимального уровня).</div>
 <div id="map" style="height: 600px; width: 100%;" data-center-lat="<%= Rails.application.config.map_center_lat -%>" data-center-lon="<%= Rails.application.config.map_center_lon -%>" data-zoom="<%= Rails.application.config.map_zoom -%>" /></div>
 
 
