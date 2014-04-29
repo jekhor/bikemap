@@ -36,6 +36,26 @@ h1, h2, h3, h4, h5 {
   font-weight: normal;
 }
 
+.full-width {
+  width: 100%;
+  float: left;
+}
+
+#left {
+  width: 200px;
+  float: left; 
+}
+
+#right {
+  overflow: hidden;
+}
+
+.container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+
 /* Navigation */
 
 nav#secondary {

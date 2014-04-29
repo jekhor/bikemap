@@ -25,7 +25,7 @@
 <body>
 
   <div class="container">
-    <div id="header" class="span-24 last">
+    <div id="header" class="full-width">
       <nav id="secondary">
       <ul>
         <li><%= link_to "Список парковок", features_path %></li>
@@ -52,7 +52,7 @@
     <%= yield(:header) %>
   </div>
 
-  <div class="span-24 last">
+  <div class="full-width">
     <div id="center">
       <% unless notice.nil? %>
         <p class="notice"><%= notice %></p>
@@ -64,16 +64,16 @@
       <%= yield %>
     </div>
 
-    <div id="left" class="span-6">
+    <div id="left">
       <%= yield(:left) %>
     </div>
 
-    <div id="right" class="span-18 last">
+    <div id="right">
       <%= yield(:bottom) %>
     </div>
   </div>
 
-  <div id="footer" class="span-24 last">
+  <div id="footer" class="full-width">
     <p>
     <%= link_to feed_path do
       image_tag('feed.png', :class => 'link-icon') + ' RSS'
