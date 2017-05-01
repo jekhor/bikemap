@@ -1,4 +1,4 @@
-Class UsersController < ApplicationController
+class UsersController < ApplicationController
   before_filter :require_admin!
 
   private
