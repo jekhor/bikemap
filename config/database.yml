@@ -17,6 +17,7 @@ development:
   postgis_extension: /usr/share/postgresql/9.0/contrib/postgis-1.5
 #  schema_search_path: public,postgis
   encoding: unicode
+  port: 5432
   database: MapEverything_development
   pool: 5
   username: jek
@@ -45,6 +46,7 @@ test:
   postgis_extension: /usr/share/postgresql/9.0/contrib/postgis-1.5
 #  schema_search_path: public,postgis
   encoding: unicode
+  port: 5432
   database: MapEverything_test
   pool: 5
   username: jek
@@ -55,6 +57,7 @@ production:
   postgis_extension: /usr/share/postgresql/9.0/contrib/postgis-1.5
 #  schema_search_path: public,postgis
   encoding: unicode
+  port: 5432
   database: MapEverything_production
   pool: 5
   username: jek

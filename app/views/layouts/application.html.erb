@@ -52,7 +52,6 @@
     <%= yield(:header) %>
   </div>
 
-  <div class="full-width">
     <div id="center">
       <% unless notice.nil? %>
         <p class="notice"><%= notice %></p>
@@ -60,6 +59,7 @@
       <% unless alert.nil? %>
         <p class="alert"><%= alert %></p>
       <% end %>
+
 
       <%= yield %>
     </div>
@@ -71,7 +71,6 @@
     <div id="right">
       <%= yield(:bottom) %>
     </div>
-  </div>
 
   <div id="footer" class="full-width">
     <p>

@@ -41,9 +41,19 @@ h1, h2, h3, h4, h5 {
   float: left;
 }
 
+#center {
+  padding-bottom: 20px;
+  display: block;
+  float: left;
+  margin-left: 360px;
+  min-width: 500px;
+}
+
 #left {
-  width: 200px;
+  width: 350px;
   float: left; 
+  display: block;
+  margin-left: -100%;
 }
 
 #right {
@@ -52,7 +62,7 @@ h1, h2, h3, h4, h5 {
 
 .container {
   width: 95%;
-  margin: 0 auto;
+/*  margin: 0 auto; */
 }
 
 
@@ -186,10 +196,6 @@ p.comment-text {
 #error_explanation  ul li {
     font-size: 12px;
     list-style: square;
-}
-
-#center {
-  padding-bottom: 20px;
 }
 
 ul.tabs-nav, ul.nav {
