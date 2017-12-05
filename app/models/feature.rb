@@ -23,16 +23,16 @@ class Feature < ActiveRecord::Base
   RGeo::ActiveRecord::GeometryMixin.set_json_generator(:geojson)
 
   comma do
-    geometry t('feature.coordinates')
-    existing t('feature.type') do |existing| existing ? t('feature.existing') : t('feature.needed') end
-    rating t('feature.rating')
-    description t('feature.description')
-    address t('feature.address')
-    comment t('feature.comment')
-    capacity t('feature.capacity')
-    approved t('feature.approved') do |approved| approved ? t('yes') : t('no') end
-    created_at t('feature.created_at')
-    user t('feature.user') do |user| user.name end
+    geometry I18n.t('feature.coordinates')
+    existing I18n.t('feature.type') do |existing| existing ? I18n.t('feature.existing') : I18n.t('feature.needed') end
+    rating I18n.t('feature.rating')
+    description I18n.t('feature.description')
+    address I18n.t('feature.address')
+    comment I18n.t('feature.comment')
+    capacity I18n.t('feature.capacity')
+    approved I18n.t('feature.approved') do |approved| approved ? I18n.t('yes') : I18n.t('no') end
+    created_at I18n.t('feature.created_at')
+    user I18n.t('feature.user') do |user| user.name end
   end
 
 
