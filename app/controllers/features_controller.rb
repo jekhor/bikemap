@@ -44,10 +44,10 @@ class FeaturesController < ApplicationController
 
   def feed
     if params[:show_unapproved]
-      @title = "Карта велопарковок — для модераторов"
+      @title = t('features.moderators_map')
       @features = Feature.order('created_at DESC')
     else
-      @title = "Карта велопарковок — последние"
+      @title = t('features.latest_map')
       @features = Feature.where(:approved => true).order('created_at DESC')
     end
 
@@ -63,7 +63,7 @@ class FeaturesController < ApplicationController
   # GET /features/1.json
   def show
     @feature = Feature.find(params[:id])
-    @title = @feature.existing? ? "Велопарковка" : "Здесь нужна велопарковка!"
+    @title = @feature.existing? ? t('features.bikeparking') : t('features.bikeparking_needed')
     @liked = @feature.users_liked.include? current_user if user_signed_in?
 
     respond_to do |format|
@@ -76,8 +76,8 @@ class FeaturesController < ApplicationController
   # GET /features/new
   # GET /features/new.json
   def new
-    @title = "Создание новой точки"
-    @subtitle = "Пожалуйста, заполните форму"
+    @title = t('features.new')
+    @subtitle = t('features.new_subtitle')
     @hide_like = true
     @feature = Feature.new
     @feature.geometry = params[:geometry]
@@ -92,7 +92,7 @@ class FeaturesController < ApplicationController
 
   # GET /features/1/edit
   def edit
-    @title = "Редактирование точки"
+    @title = t('features.edit')
     @hide_like = true
     @feature = Feature.find(params[:id])
     respond_to do |format|
@@ -115,7 +115,7 @@ class FeaturesController < ApplicationController
     respond_to do |format|
       if @feature.save
         @feature.toggle_like(current_user, 'like')
-        format.html { redirect_to @feature, notice: 'Feature was successfully created.' }
+        format.html { redirect_to @feature, notice: t('feature.created') }
         format.json { render json: @feature, status: :created, location: @feature }
         format.js
       else
@@ -150,7 +150,7 @@ class FeaturesController < ApplicationController
       end
       
       if have_edit_permissions?(@feature) and @feature.update_attributes(attrs)
-        format.html { redirect_to @feature, notice: 'Feature was successfully updated.' }
+        format.html { redirect_to @feature, notice: t('features.updated') }
         format.json { head :no_content }
         format.js
       else
@@ -198,7 +198,7 @@ class FeaturesController < ApplicationController
         format.js
       else
         format.json { render status: :unprocessable_entity }
-        format.html { redirect_to features_url, :alert => "You don't have permissions to delete feature" }
+        format.html { redirect_to features_url, :alert => t('features.no_permissions') }
         format.js { render action: 'edit' }
       end
     end

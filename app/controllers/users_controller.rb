@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def require_admin!
     authenticate_user!
     unless current_user.admin?
-      flash[:alert] = "You must have admin privileges for editing users"
+      flash[:alert] = t('users.admin_required')
       redirect_to root_url
     end
   end
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: t('users.updated') }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

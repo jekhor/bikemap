@@ -2,4 +2,48 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  users:
+    admin_required: "You must have admin privileges for editing users"
+    updated: "User's account has been successfully updated."
+  comments:
+    created: "Comment posted."
+    create_failed: "Can't post comment."
+    updated: "Comment updated."
+    update_failed: "Can't update comment."
+  feature:
+    coordinates: "Coordinates"
+    type: "Type"
+    existing: "Existing"
+    rating: "Rating"
+    description: "Place name"
+    address: "Address"
+    comment: "Comment"
+    capacity: "Capacity"
+    approved: "Approved"
+    created_at: "Creation date"
+    user: "User"
+  features:
+    new: "Create feature"
+    new_subtitle: "Please specify details below"
+    edit: "Edit feature"
+    created: "Feature created."
+    updated: "Feature updated."
+    no_permissions: "You don't have permissions to delete features"
+    moderators_map: "Bike parkings map — unapproved"
+    latest_map: "Bike parkings map — latest"
+  activerecord:
+    attributes:
+      feature:
+        description: "Place name"
+        address: "Address"
+    errors:
+      models:
+        feature:
+          attributes:
+            description:
+              blank: "can't be empty"
+  will_paginate:
+    previous_label: "&#8592;"
+    next_label: "&#8594;"
+    page_gap: "&hellip;"
+
